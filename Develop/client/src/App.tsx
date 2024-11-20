@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom"
 
-import Navbar from "./components/Navbar"
+// import Profile from "./components/Avatar"
 
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Profile /> */}
         <main>
           <Outlet />
         </main>

@@ -1,74 +1,16 @@
-import { useState, useEffect, MouseEventHandler } from "react";
-import { Link } from "react-router-dom";
-import { WorkData } from "../interfaces/WorkData";
-import { deleteWork, retrieveWorks } from "../api/workAPI";
+import { Avatar } from "@rewind-ui/core";
 
 const MainPage = () => {
-  const [ workArray, setWorkArray ] = useState<WorkData[]>([]);
-  const [ dataCheck, setDataCheck ] = useState(true);
-
-  const fetchWork = async () => {
-    try {
-      const data = await retrieveWorks();
-      setWorkArray(data);
-    } catch (err) {
-      console.error('Failed to retrieve work:', err);
-    }
-  };
-
-  useEffect(() => {
-    if(dataCheck) {
-      fetchWork();
-    } else {
-      setDataCheck(false);
-    }
-  }, [dataCheck]);
-
-  const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    const workId = Number(event.currentTarget.value);
-    if (!isNaN(workId)) {
-      try {
-        const data = await deleteWork(workId);
-        fetchWork();
-        return data;
-      } catch (error) {
-        console.error('Failed to delete ticket:', error);
-      }
-    }
-  };
-
   return (
-    <div className="main-list">
-      <div>
-        <Link to='/show-volunteers'>Click here to see Volunteers!</Link>
-      </div>
-      {dataCheck ? (
-        <div className="work-list">
-          {workArray.map((work) => (
-            <div key={work.id} className='work-details'>
-              <h3>{work.name}</h3>
-              <h4>{work.status}</h4>
-              <div>{work.description}</div>
-              <div>{work.assignedVolunteer?.volunteerName}</div>
-              <Link to={'/edit-work'} state={{id: work.id}}>
-                <button>Edit</button>
-              </Link>
-              <button 
-                value={String(work.id)}
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div>
-          No volunteer work available!
-        </div>
-      )
-    }
-    </div>
+    <section id="game-page">
+      <nav className="bg-slate-500 flex items-center justify-between">
+      <h1 className="text-5xl p-5">GameView</h1>
+      <Avatar 
+      className="m-3"
+      src="https://s3-alpha.figma.com/checkpoints/PLV/z7y/fFznimpfrKnX7guv/52767_23920.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC52P6HEGX%2F20241117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241117T120000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=75294fa49137ecef89a47d22621665a0c5436a4dc859fbbe48e41db6bcde706a"
+      />
+      </nav>
+    </section>
   )
 };
 

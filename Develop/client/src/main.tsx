@@ -17,22 +17,6 @@ const router = createBrowserRouter([
         index: true,
         element: <MainPage />
       }, 
-      {
-        path: '/show-volunteers',
-        element: <VolunteerPage />
-      },
-      {
-        path: '/new-volunteer',
-        element: <VolunteerForm />
-      },
-      {
-        path: '/edit-volunteer',
-        element: <EditVolunteer />
-      },
-      {
-        path: '/edit-work',
-        element: <EditWork />
-      }
     ]
   }
 ]);
