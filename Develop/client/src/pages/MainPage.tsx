@@ -1,4 +1,7 @@
 // import React from "react";
+
+//This is old code used to test the video search
+
 import { useNavigate } from "react-router-dom";
 
 const MainPage: React.FC = () => {

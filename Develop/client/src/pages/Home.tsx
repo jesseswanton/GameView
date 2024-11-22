@@ -7,6 +7,8 @@ import auth from '../utils/auth';
 import '../styles/login.css';
 //import backgroundImage from '/gamer_bkgrd.jpg';
 
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
 
     const [users, setUsers] = useState<UserData[]>([]);
@@ -39,6 +41,12 @@ const Home = () => {
         }
     }
 
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+      navigate("/search-video"); // Navigates to the SearchPage component
+    };
+
     if (error) {
         return <ErrorPage />;
     }
@@ -65,7 +73,11 @@ const Home = () => {
                      <UserList users={users} />
                   
                 )}
-               
+
+        <div>
+            <h2>Video game categories returned by the IGDB API will go here</h2>
+            <button onClick={handleNavigate}>Go to Search Page</button>
+        </div>
         </>
         // </div>
     
@@ -73,24 +85,3 @@ const Home = () => {
 };
 
 export default Home;
-
-//I was using the below as my home page "MainPage.tsx"
-
-// import { useNavigate } from "react-router-dom";
-
-// const MainPage: React.FC = () => {
-//   const navigate = useNavigate();
-
-//   const handleNavigate = () => {
-//     navigate("/search-video"); // Navigates to the SearchPage component
-//   };
-
-//   return (
-//     <div>
-//       <h1>Welcome to the Main Page</h1>
-//       <button onClick={handleNavigate}>Go to Search Page</button>
-//     </div>
-//   );
-// };
-
-// export default MainPage;
