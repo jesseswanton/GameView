@@ -38,7 +38,7 @@ const SearchPage: React.FC = () => {
       <button onClick={handleSearch}>Search</button>
 
       <div>
-        {videos.map((video: any, index: number) => (
+        {videos.map((video: { snippet: { thumbnails: { default: { url: string } }, title: string, description: string } }, index: number) => (
           <div key={index} className="video">
             <img
               src={video.snippet.thumbnails.default.url}
