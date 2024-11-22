@@ -13,4 +13,4 @@ const seedAll = async () => {
         process.exit(1);
     }
 };
-// seedAll();
+seedAll();

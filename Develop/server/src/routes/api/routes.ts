@@ -9,7 +9,7 @@ import {
   deleteUser,
 } from '../../controllers/user-controller.js';
 
-// const router = express.Router();
+ const router = express.Router();
 
 // GET /users - Get all users
 router.get('/', getAllUsers);

@@ -1,6 +1,7 @@
 ///not using
+import express from 'express';
 import { getAllUsers, getUserById, createUser, updateUser, deleteUser, } from '../../controllers/user-controller.js';
-// const router = express.Router();
+const router = express.Router();
 // GET /users - Get all users
 router.get('/', getAllUsers);
 // GET /users/:id - Get a user by id

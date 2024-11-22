@@ -21,9 +21,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/gapi": "^0.0.47",
     "@types/gapi.client": "^1.0.8",
-    "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.9.1",
     "concurrently": "^8.2.2",
@@ -33,6 +33,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "emailjs-com": "^3.2.0",
+    "express": "^4.21.1",
     "import": "^0.0.6",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
