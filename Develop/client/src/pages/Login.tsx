@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { useState, type FormEvent, type ChangeEvent, useEffect, useRef } from 'react';
 import Auth from '../utils/auth';
 import { login, register } from '../api/authAPI';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -12,6 +12,8 @@ import '../styles/Login.css';
 const Login = () => {
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
 
   const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
@@ -31,8 +33,11 @@ const Login = () => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
 
-  //for password errors
-  const [error, setError] = useState<string | null>(null);
+ // Error states for login and registration
+ const [loginError, setLoginError] = useState<string | null>(null);
+ const [registerError, setRegisterError] = useState<string | null>(null);
+ const [emailError, setEmailError] = useState<string | null>(null);
+ const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const handleLoginChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -52,28 +57,40 @@ const Login = () => {
     });
     if (name === 'email') {
       if (!validateEmail(value)) {
-        setError('Please enter a valid email address.');
+        setEmailError('Please enter a valid email address.');
       } else {
-        setError(null);
+        setEmailError(null);
       }
     }
+        // Clear password error if passwords match
+        if (name === 'password' || name === 'confirmPassword') {
+          if (registerData.password !== registerData.confirmPassword) {
+            setPasswordError('Passwords do not match!');
+          } else {
+            setPasswordError(null);
+          }
+        }
+      
   };
 
   const handleLoginSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setLoginError(null);
     try {
       const data = await login(loginData);
       Auth.login(data.token);
     } catch (err) {
-      setError('Failed to login');
+      setLoginError('Failed to login, check your username and password');
       console.error('Failed to login', err);
     }
+    
   };
+ 
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError(null); //clears errors
+    setRegisterError(null); //clears errors
     if (registerData.password !== registerData.confirmPassword) {
-      setError('Passwords do not match!');
+      setRegisterError('Passwords do not match!');
       console.error('Passwords do not match!');
       return;
     }
@@ -82,15 +99,24 @@ const Login = () => {
       const data = await register(registerData);
       Auth.login(data.token);
     } catch (err) {
-      setError('Failed to register');
+      setRegisterError('Failed to register');
       console.error('Failed to register', err);
     }
+   
   };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (formRef.current && !formRef.current.contains(event.target as Node)) {
+        setLoginError(null);
+        setRegisterError(null);
+      }
+    };
 
-
-// i should only need to toggle bewteen the Register ForgotPassword and ResetPassword components. 
-
-
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   return (
     <div className='form-container'>
       {/* The video background */}
@@ -126,7 +152,7 @@ const Login = () => {
               value={registerData.email || ''}
               onChange={handleRegisterChange}
             />
-            {error && <p className='error-message'>{error}</p>}
+            {emailError && <p className='error-message'>{emailError}</p>}
           </div>
           <div className='form-group'>
             <label>Password</label>
@@ -166,7 +192,10 @@ const Login = () => {
               </span>
             </div>
           </div>
-          {error && <div className="error-message">{error}</div>}
+          <div>
+          {passwordError && <p className="error-message">{passwordError}</p>}
+          </div>
+          {registerError && <div className="error-message">{registerError}</div>}
           <div className="form-group">
             <button className="btn btn-primary" type="submit">
               Register
@@ -192,6 +221,7 @@ const Login = () => {
               value={loginData.username || ''}
               onChange={handleLoginChange}
             />
+              {loginError && <p className='error-message'>{loginError}</p>} 
           </div>
           <div className="form-group">
             <label>Password</label>
