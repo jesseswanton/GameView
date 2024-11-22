@@ -3,9 +3,9 @@ import { userRouter } from './user-routes.js';
 //import { registerUser } from '../../controllers/authControllers.js';
 
 
-const router = Router();
+// const router = Router();
 
 router.use('/users', userRouter);
 //router.post('/auth/register', registerUser);
 
-export default router;
+// export default router;

@@ -214,3 +214,33 @@ tbody tr:nth-child(odd) {
 .form > select {
   text-align: center;
 }
+
+.video {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.video img {
+  margin-right: 15px;
+  max-width: 120px;
+}
+
+.video h3 {
+  margin: 0 0 5px;
+}
+
+.video p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.video a {
+  margin-top: 10px;
+  display: inline-block;
+  color: blue;
+  text-decoration: underline;
+}
