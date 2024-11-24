@@ -1,5 +1,3 @@
-///not using
-
 import express from 'express';
 import {
   getAllUsers,

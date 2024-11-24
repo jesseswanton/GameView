@@ -1,14 +1,17 @@
 
 import { useState, FormEvent } from 'react';
-import { forgotPasswordRequest } from '../api/authAPI'; // Your API call to request reset link
+//import { forgotPasswordRequest } from '../api/authAPI'; // Your API call to request reset link
 import '../styles/Login.css';
+
+import axios from 'axios';
+import emailjs from 'emailjs-com';
 
 
 const ForgotPassword = () => {
 const [email, setEmail] = useState('');
-const [message, setMessage] = useState<string | null>(null);
+const [message, setMessage] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setEmail(value);
   };
@@ -16,16 +19,48 @@ const [message, setMessage] = useState<string | null>(null);
 const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      // Call API to send reset password link
-      await forgotPasswordRequest({ email });
-      setMessage('If an account with this email exists, a reset link has been sent.');
-    } catch (err) {
-      setMessage('There was an error, please try again.');
-    }
-  };
+      // 1. Send request to backend to check email and generate temporary password
+      const response = await axios.post('http://localhost:5000/forgot-password', { email });
 
+      if (response.data.success) {
+          const tempPassword = response.data.tempPassword; // Received temporary password
+
+          const emailTemplateParams = {
+              email_to: email,
+              temp_password: tempPassword,
+          };
+
+          // Access EmailJS service details from .env
+          const userId = process.env.REACT_APP_EMAILJS_USER_ID;
+          const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+          const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+
+          // Send the email using EmailJS
+          if (userId && serviceId && templateId) {
+            const result = await emailjs.send(serviceId, templateId, emailTemplateParams, userId);
+            if (result.status === 200) {
+              setMessage('Temporary password has been sent to your email.');
+            } else {
+              setMessage('Failed to send email. Please try again later.');
+            }
+          } else {
+            setMessage('Failed to send email. Please try again later.');
+          }
+      }
+    } catch (error) {
+      setMessage('An error occurred. Please try again later.');
+    }
+};
+ 
   return (
-    
+    <div className='form-container'>
+    {/* The video background */}
+    <div className="video-background">
+      <video autoPlay loop muted>
+        <source src="/video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
     <form onSubmit={handleSubmit} className="form">
       <h2>Reset Your Password</h2>
       <div className="form-group">
@@ -36,7 +71,7 @@ const handleSubmit = async (e: FormEvent) => {
             value={email}
             name="email"
             // onChange={(e) => setEmail(e.target.value)}
-            onChange={handleInputChange}
+            onChange={handleEmailChange}
             type="email"
             id="email"
             placeholder="Enter your email"
@@ -50,9 +85,11 @@ const handleSubmit = async (e: FormEvent) => {
         <button type="submit" className="btn btn-primary">
           Send Reset Link
         </button>
+       
         
       </div>
     </form>
+    </div>
   );
 };
 
