@@ -19,8 +19,8 @@ const [message, setMessage] = useState('');
 const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      // 1. Send request to backend to check email and generate temporary password
-      const response = await axios.post('http://localhost:5000/forgot-password', { email });
+     
+      const response = await axios.post<{ success: boolean; tempPassword: string }>('http://localhost:5000/forgot-password', { email });
 
       if (response.data.success) {
           const tempPassword = response.data.tempPassword; // Received temporary password
