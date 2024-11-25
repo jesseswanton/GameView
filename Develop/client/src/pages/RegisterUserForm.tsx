@@ -55,7 +55,8 @@ const RegisterForm = () => {
         setError(null);
       }
     }
-
+    console.log('Username is available' + name);
+    console.log('Username is already taken' + name);
   
   };
 
@@ -88,7 +89,8 @@ const RegisterForm = () => {
          {isCheckingUsername && <p>Checking username...</p>}
          {usernameAvailable === false && <p className='error-message'>Username is already taken</p>}
         {usernameAvailable === true && <p className='success-message'>Username is available</p>}
-   
+      
+
       </div>
       <div className="form-group">
         <label>Email</label>

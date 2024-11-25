@@ -3,7 +3,8 @@ import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
-import { Pool } from 'pg';
+import pkg from 'pg';
+const { Pool } = pkg;
 
 const router = Router();
 const pool = new Pool({
