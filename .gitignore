@@ -16,8 +16,7 @@ client/build
 server/build
 
 # Environment variables
-client/.env
-server/.env
+.env
 
 # Temporary files
 *.tmp
@@ -25,10 +24,11 @@ server/.env
 
 # Editor-specific files
 .vscode/
+!.vscode/extensions.json
 .idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-.env
+*.sw?
