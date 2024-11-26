@@ -12,29 +12,10 @@ const generateTempPassword = (length = 8) => {
   }
   return tempPassword;
 };
-// const resetPassword = async (email: string, tempPassword: string) => {
-//   try {
-//     const response = await fetch('/api/reset-password', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ email, tempPassword }),  // Send email and new password to backend
-//     });
 
-//     if (response.ok) {
-//       console.log('Password reset successfully');
-//     } else {
-//       const data = await response.json();
-//       console.error(data.message || 'Failed to reset password');
-//     }
-//   } catch (error) {
-//     console.error('Error resetting password:', error);
-//   }
-// };
 const resetPassword = async (email: string, tempPassword: string) => {
-  const token = localStorage.getItem('jwtToken');  // Get the JWT token from localStorage
-
+  const token = import.meta.env.VITE_JWT_SECRET;  // Get the JWT token from environment variables
+ console.log("token: ", token);
   try {
     const response = await fetch('/api/reset-password', {
       method: 'POST',
@@ -50,9 +31,11 @@ const resetPassword = async (email: string, tempPassword: string) => {
     } else {
       try {
         const data = await response.json();
+       
         console.error(data.message || 'Failed to reset password');
       } catch (error) {
         console.error('Failed to parse response as JSON:', error);
+       
       }
     }
   } catch (error) {
@@ -61,9 +44,9 @@ const resetPassword = async (email: string, tempPassword: string) => {
 };
 
 const ForgotPassword = () => {
-const [email, setEmail] = useState('');
-const [message, setMessage] = useState('');
-const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
 
 
