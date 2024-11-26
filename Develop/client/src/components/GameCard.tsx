@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 interface GameCardProps {
   id: number;
   name: string;
-  genres: string;
+  genres: [];
   releaseDates?: { date: string }[];
+  handleDelete: () => void;
 }
 
 const GameCard = ({ id, name, genres, releaseDates }: GameCardProps) => {
@@ -12,7 +13,7 @@ const GameCard = ({ id, name, genres, releaseDates }: GameCardProps) => {
     <div className="game-card">
       <div className="game-card-details">
         <h3>{name}</h3>
-        <h4>Genres: {genres?.map((g: { name: any; }) => g.name).join(", ") || "N/A"}</h4>
+        <h4>Genres: {genres?.map((g: { name: string; }) => g.name).join(", ") || "N/A"}</h4>
         <div>
           Release Dates: {releaseDates?.map((d) => d.date).filter(Boolean).join(", ") || "N/A"}
         </div>
