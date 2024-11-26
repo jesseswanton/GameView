@@ -71,7 +71,7 @@ const Login = () => {
             }
           }, 500); // Adjust the delay as needed
         }
-        {passwordError && <p className="error-message">{passwordError}</p>} 
+        {passwordError && <p className="error-message">{passwordError}</p>}  
   };
 
   const handleLoginSubmit = async (e: FormEvent) => {
@@ -197,7 +197,7 @@ const Login = () => {
             </div>
           </div>
           <div>
-          
+            
           </div>
           {registerError && <div className="error-message">{registerError}</div>}
           <div className="form-group">
