@@ -14,8 +14,9 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import SearchPage from "./pages/SearchPage.tsx";
 import VideoPage from "./pages/VideoPage.tsx";
 import Home from './pages/Home.tsx';
-import RegisterUserForm from './pages/RegisterUserForm';
+import RegisterForm from './pages/RegisterUserForm';
 import ForgotPassword from './pages/ForgotPassword';
+//import GameCard from './pages/Favorites.tsx';
 
 
 const router = createBrowserRouter([
@@ -45,13 +46,17 @@ const router = createBrowserRouter([
         element: <Login />,
       },
           {
-        path: '/registerUser',
-        element: <RegisterUserForm />,
+        path: '/registerForm',
+        element: <RegisterForm />,
       },
       {
         path: '/forgotPassword',
         element: <ForgotPassword />,
       },
+      // {
+      //   path: '/favorites',
+      //   element: <GameCard />,
+      // },
       
     ]
   }
