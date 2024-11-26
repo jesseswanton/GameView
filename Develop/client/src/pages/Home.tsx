@@ -84,8 +84,12 @@ const Home: React.FC = () => {
     }
   };
 
-  // Navigation
+  // Navigation with example query
+
   const navigate = useNavigate();
+  const handleNavigateToSearch = () => {
+    navigate("/search-video", { state: { searchQuery: "Reviews for " + "Baulder's Gate 3" } });
+  };
 
   if (error) {
     return <ErrorPage />;
@@ -103,7 +107,7 @@ const Home: React.FC = () => {
 
       <div className="main-list">
         <h2>Video game categories returned by the IGDB API:</h2>
-        <button onClick={() => navigate("/search-video")}>Go to Search Page</button>
+        <button onClick={handleNavigateToSearch}>Search for Example Query</button>
         <div>
           <Link to="/games">Click here to see the full game list!</Link>
         </div>
