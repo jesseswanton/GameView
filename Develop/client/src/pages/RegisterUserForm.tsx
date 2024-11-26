@@ -21,19 +21,26 @@ const RegisterForm = () => {
   const [registerPasswordVisible, setRegisterPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [usernameAvailable, setUsernameAvailable] = useState<boolean | null>(null);
+  const [registerError, setRegisterError] = useState<string | null>(null);
+
+  
   const checkUsernameAvailability = async (username: string) => {
     setIsCheckingUsername(true);
     try {
       const response = await axios.post('/api/check-username', { username });
+      console.log("Response: ", response.data);
       if (response.data.message === 'Username is available') {
      
         setUsernameAvailable(true);
+      //  return true
       } else {
         setUsernameAvailable(false);
+      //  return false
       }
     } catch (error) {
-      console.error('Error checking username availability:', error);
+      console.log('Error checking username availability:', error);
       setUsernameAvailable(false);
+    //  return false
     }
   };
   
@@ -45,7 +52,20 @@ const RegisterForm = () => {
       [name]: value,
     });
     if (name === 'username') {
-      checkUsernameAvailability(value);
+      if(!checkUsernameAvailability(value)) {
+        setError('Username is already taken.');
+      } else {
+        setError(null);
+      }
+     //  checkUsernameAvailability(value);
+     /*
+     let check = checkUsernameAvailability(value);
+     if (check) {
+       setError(null);
+     } else {
+        setError('Username is already taken.');
+     }
+        */
     }
 
     if (name === 'email') {
@@ -55,22 +75,21 @@ const RegisterForm = () => {
         setError(null);
       }
     }
-    console.log('Username is available' + name);
-    console.log('Username is already taken' + name);
   
   };
 
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
       if (registerData.password !== registerData.confirmPassword) {
-      setError('Passwords do not match!');
-      return;
+        setRegisterError('Passwords do not match!');
+        return;
     }
     try {
       const data = await register(registerData);
       Auth.login(data.token);
     } catch (err) {
-      setError('Registration failed. Please try again.');
+      console.log("Error: ", err);
+      setRegisterError('Registration failed. Please try again.');
     }
   };
 
@@ -101,7 +120,7 @@ const RegisterForm = () => {
           onChange={handleRegisterChange}
           className="form-input"
         />
-          {/* {error && <p className='error-message'>{error}</p>} */}
+           {error && <p className='error-message'>{error}</p>} 
       </div>
       <div className="form-group">
         <label>Password</label>
@@ -170,7 +189,8 @@ const RegisterForm = () => {
               </span>
             </div>
           </div> */}
-      {error && <div className="error-message">{error}</div>}
+      {registerError && <div className="error-message">{registerError}</div>}
+      {registerError ? <div className="error-message">{registerError}</div> : null}
       <div className="form-group">
         <button type="submit" className="btn btn-primary">
           Register

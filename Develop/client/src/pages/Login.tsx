@@ -64,11 +64,13 @@ const Login = () => {
     }
         // Clear password error if passwords match
         if (name === 'password' || name === 'confirmPassword') {
-          if (registerData.password !== registerData.confirmPassword) {
-            setPasswordError('Passwords do not match!');
-          } else {
-            setPasswordError(null);
-          }
+          setTimeout(() => {
+            if (registerData.password !== registerData.confirmPassword) {
+              setPasswordError('Passwords do not match!');
+            } else {
+              setPasswordError(null);
+            }
+          }, 500); // Adjust the delay as needed
         }
       
   };
@@ -88,7 +90,7 @@ const Login = () => {
  
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setRegisterError(null); //clears errors
+    //setRegisterError(null); //clears errors
     if (registerData.password !== registerData.confirmPassword) {
       setRegisterError('Passwords do not match!');
       console.error('Passwords do not match!');
@@ -97,12 +99,14 @@ const Login = () => {
 
     try {
       const data = await register(registerData);
+      console.log("Returned Data: ", data);
       Auth.login(data.token);
     } catch (err) {
+      console.log("Error: ", err);
       setRegisterError('Failed to register');
       console.error('Failed to register', err);
     }
-   
+    
   };
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -117,6 +121,7 @@ const Login = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   return (
     <div className='form-container'>
       {/* The video background */}
@@ -193,7 +198,7 @@ const Login = () => {
             </div>
           </div>
           <div>
-          {passwordError && <p className="error-message">{passwordError}</p>}
+           {passwordError && <p className="error-message">{passwordError}</p>} 
           </div>
           {registerError && <div className="error-message">{registerError}</div>}
           <div className="form-group">

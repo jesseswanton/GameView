@@ -52,16 +52,7 @@ const Home = () => {
     }
 
     return (
-        // <div style={{ 
-        //     backgroundImage: `url(${backgroundImage})`,
-        //     backgroundSize: 'cover',
-        //     backgroundPosition: 'left', 
-        //     minHeight: '100vh', 
-        //     opacity: '0.9',
-        //     width: '100%',
-        //     height: '100%',
-
-        //   }}>
+  
         <>
           
             {

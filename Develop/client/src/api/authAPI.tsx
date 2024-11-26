@@ -37,7 +37,7 @@ export const register = async (registerData: UserRegister) => {
     });
 
     const data = await response.json();
-
+    console.log("Data: ", data);
     if (!response.ok) {
       throw new Error('User information cannot be saved, check network tab!');
     }
@@ -51,7 +51,7 @@ export const register = async (registerData: UserRegister) => {
 
 export const forgotPasswordRequest = async ({ email }: { email: string }) => {
   try {
-    const response = await fetch('/auth/forgot-password', {
+    const response = await fetch('/auth/reset-password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
