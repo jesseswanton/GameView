@@ -12,26 +12,7 @@ const generateTempPassword = (length = 8) => {
   }
   return tempPassword;
 };
-// const resetPassword = async (email: string, tempPassword: string) => {
-//   try {
-//     const response = await fetch('/api/reset-password', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ email, tempPassword }),  // Send email and new password to backend
-//     });
 
-//     if (response.ok) {
-//       console.log('Password reset successfully');
-//     } else {
-//       const data = await response.json();
-//       console.error(data.message || 'Failed to reset password');
-//     }
-//   } catch (error) {
-//     console.error('Error resetting password:', error);
-//   }
-// };
 const resetPassword = async (email: string, tempPassword: string) => {
   const token = localStorage.getItem('jwtToken');  // Get the JWT token from localStorage
 

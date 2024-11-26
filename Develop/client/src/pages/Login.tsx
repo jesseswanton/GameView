@@ -4,7 +4,6 @@ import { login, register } from '../api/authAPI';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import type { UserLogin } from '../interfaces/UserLogin';
 import type { UserRegister } from '../interfaces/UserRegister'
-//import ForgotPassword from './ForgotPassword'; 
 import { validateEmail } from '../utils/helpers';
 
 import '../styles/Login.css';
@@ -72,7 +71,7 @@ const Login = () => {
             }
           }, 500); // Adjust the delay as needed
         }
-      
+        {passwordError && <p className="error-message">{passwordError}</p>} 
   };
 
   const handleLoginSubmit = async (e: FormEvent) => {
@@ -90,7 +89,7 @@ const Login = () => {
  
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    //setRegisterError(null); //clears errors
+    setRegisterError(null); //clears errors
     if (registerData.password !== registerData.confirmPassword) {
       setRegisterError('Passwords do not match!');
       console.error('Passwords do not match!');
@@ -198,7 +197,7 @@ const Login = () => {
             </div>
           </div>
           <div>
-           {passwordError && <p className="error-message">{passwordError}</p>} 
+          
           </div>
           {registerError && <div className="error-message">{registerError}</div>}
           <div className="form-group">

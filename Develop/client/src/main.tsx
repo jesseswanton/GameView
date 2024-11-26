@@ -12,6 +12,7 @@ import VideoPage from "./pages/VideoPage.tsx";
 import Home from "./pages/Home.tsx";
 import RegisterForm from "./pages/RegisterUserForm.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
+import PasswordUpdate from "./pages/ResetPassword.tsx";
 
 // Create the router
 const router = createBrowserRouter([
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "forgotPassword",
         element: <ForgotPassword />, // Route for password recovery
+      },
+      {
+        path: "resetPassword",
+        element: <PasswordUpdate />, // Route for password recovery
       },
     ],
   },

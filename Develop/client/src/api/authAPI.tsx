@@ -71,4 +71,34 @@ export const forgotPasswordRequest = async ({ email }: { email: string }) => {
     return Promise.reject('Could not process password reset request');
   }
 };
+
+// export const resetPassword = async (email: string, tempPassword: string) => {
+//   const token = localStorage.getItem('jwtToken');  // Get the JWT token from localStorage
+
+//   try {
+//     const response = await fetch('/api/reset-password', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': `Bearer ${token}`,  // Send the token in the Authorization header
+//       },
+//       body: JSON.stringify({ email, tempPassword }),
+//     });
+
+//     if (response.ok) {
+//       console.log('Password reset successfully');
+//     } else {
+//       try {
+//         const data = await response.json();
+//         console.error(data.message || 'Failed to reset password');
+//       } catch (error) {
+//         console.error('Failed to parse response as JSON:', error);
+//       }
+//     }
+//   } catch (error) {
+//     console.error('Error resetting password:', error);
+//   }
+// };
+
+
 export { login };

@@ -28,8 +28,9 @@ const RegisterForm = () => {
     setIsCheckingUsername(true);
     try {
       const response = await axios.post('/api/check-username', { username });
-      console.log("Response: ", response.data);
-      if (response.data.message === 'Username is available') {
+      const data = response.data as { message: string };
+      console.log("Response: ", data);
+      if (data.message === 'Username is available') {
      
         setUsernameAvailable(true);
       //  return true
@@ -56,19 +57,10 @@ const RegisterForm = () => {
         setError('Username is already taken.');
       } else {
         setError(null);
-      }
-     //  checkUsernameAvailability(value);
-     /*
-     let check = checkUsernameAvailability(value);
-     if (check) {
-       setError(null);
-     } else {
-        setError('Username is already taken.');
-     }
-        */
     }
+  }
 
-    if (name === 'email') {
+  if (name === 'email') {
       if (!validateEmail(value)) {
         setError('Please enter a valid email address.');
       } else {
