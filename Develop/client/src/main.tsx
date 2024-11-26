@@ -4,7 +4,9 @@ import './index.css'
 
 import App from './App.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
-import MainPage from './pages/MainPage.tsx';
+import MainPage from './pages/Home.tsx';
+import GameList from './components/GameList.tsx'; // Display list of games
+import GameCard from './components/GameCard.tsx';
 
 
 const router = createBrowserRouter([
@@ -15,30 +17,24 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MainPage />
-      }, 
-      {
-        path: '/show-volunteers',
-        element: <VolunteerPage />
+        element: <MainPage />,
       },
       {
-        path: '/new-volunteer',
-        element: <VolunteerForm />
+        path: '/games',
+        element: <GameList />, // Route for showing a list of games
       },
       {
-        path: '/edit-volunteer',
-        element: <EditVolunteer />
+        path: '/new-game',
+        element: <GameCard id={0} name={''} genres={''} handleDelete={function (): void {
+          throw new Error('Function not implemented.');
+        } } />, // Route for creating a new game
       },
-      {
-        path: '/edit-work',
-        element: <EditWork />
-      }
-    ]
-  }
+    ],
+  },
 ]);
 
 const rootElement = document.getElementById('root');
-if(rootElement) {
+if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <RouterProvider router={router} />
   );
