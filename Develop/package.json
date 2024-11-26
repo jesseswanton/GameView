@@ -33,12 +33,15 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@types/axios": "^0.9.36",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "emailjs-com": "^3.2.0",
     "express": "^4.21.1",
     "import": "^0.0.6",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
+    "pg": "^8.13.1",
     "react-icons": "^5.3.0",
     "react-modal": "^3.16.1",
     "sequelize": "^6.37.5"
