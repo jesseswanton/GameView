@@ -1,4 +1,11 @@
+.navbar-logo-img {
+  height: 72px;
+  width: auto;
+}
 
+.dark-gray {
+  background-color: #bebebe;
+}
 
  html {
   line-height: 1.15;
@@ -93,10 +100,6 @@ sup {
 
 img {
   border-style: none;
-}
-
-.mint-green{
-  background-color: #e3f9e5;
 }
 
 button,

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import he from "he";
 
 interface Video {
@@ -12,9 +12,15 @@ interface Video {
 }
 
 const SearchPage: React.FC = () => {
-  const [query, setQuery] = useState("");
-  const [videos, setVideos] = useState<Video[]>([]);
+  const location = useLocation();
   const navigate = useNavigate();
+
+  // Get the search query passed from the previous page
+  const initialQuery = location.state?.searchQuery || ""; // Default to an empty string if not provided
+  // used for search box which is commented out
+  // const [query, setQuery] = useState(initialQuery);
+  const [query] = useState(initialQuery);
+  const [videos, setVideos] = useState<Video[]>([]);
 
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
   const API_URL = "https://www.googleapis.com/youtube/v3/search";
@@ -44,18 +50,28 @@ const SearchPage: React.FC = () => {
     navigate("/"); // Navigates to the Home page
   };
 
+  // Automatically search if an initial query is provided
+  useEffect(() => {
+    if (initialQuery) {
+      handleSearch();
+    }
+  });
+
   return (
     <div>
       <h2>
-        Reviews for the video game selected will automatically be searched here
+        {query}
       </h2>
-      <input
+
+      {/* Commented out the search bar and button */}
+      {/* <input
         type="text"
         placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch}>Search</button> */}
+
       <button onClick={handleNavigate}>Go back</button>
 
       <div>
