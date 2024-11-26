@@ -2,13 +2,7 @@ import { Router } from 'express';
 import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-//import crypto from 'crypto';
-// import pkg from 'pg';
-// const { Pool } = pkg;
 const router = Router();
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-// });
 // This function is triggered during login or registration
 const generateToken = (username) => {
     const secretKey = process.env.JWT_SECRET_KEY || ''; // Get the secret key from .env
