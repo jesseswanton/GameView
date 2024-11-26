@@ -1,19 +1,47 @@
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import auth from '../utils/auth';
 
 const Navbar = () => {
+  const [loginCheck, setLoginCheck] = useState(false);
+
+  const checkLogin = () => {
+    if (auth.loggedIn()) {
+      setLoginCheck(true);
+    }
+  };
+
+  useEffect(() => {
+    console.log(loginCheck);
+    checkLogin();
+  }, [loginCheck]);
+
   return (
-    <nav className="nav">
-      <div className="nav-title">
-        <NavLink to="/" className="nav-logo">
-          <h2>GameView</h2>
-        </NavLink>
+    <div className='display-flex justify-space-between align-center py-2 px-5 mint-green'>
+      <h2>Game View</h2>
+      <div>
+        {!loginCheck ? (
+          <button className='btn' type='button' style={{ backgroundColor: 'black', color: 'white' }}>
+            <Link to='/login' style={{ color: 'white', textDecoration: 'none' }} 
+            onMouseOver={(e) => e.currentTarget.style.color = 'red'} 
+            onMouseOut={(e) => e.currentTarget.style.color = 'white'}>
+              Login
+            </Link>
+          </button>
+        ) : (
+            <button
+            className='btn'
+            type='button'
+            style={{ backgroundColor: 'black', color: 'white' }}
+            onClick={() => {
+              auth.logout();
+            }}
+            >
+            Logout
+            </button>
+        )}
       </div>
-      <div className="nav-links">
-        <NavLink to="/games">Games</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/contact">Contact</NavLink>
-      </div>
-    </nav>
+    </div>
   );
 };
 

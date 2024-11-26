@@ -1,27 +1,27 @@
 import express from 'express';
 import {
-  getAllVolunteers,
-  getVolunteerById,
-  createVolunteer,
-  updateVolunteer,
-  deleteVolunteer
-} from '../../controllers/controllers.js';
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+} from '../../controllers/user-controller.js';
 
-const router = express.Router();
+ const router = express.Router();
 
-// GET /volunteers - Get all volunteers
-router.get('/', getAllVolunteers);
+// GET /users - Get all users
+router.get('/', getAllUsers);
 
-// GET /volunteers/:id - Get a volunteer by ID
-router.get('/:id', getVolunteerById);
+// GET /users/:id - Get a user by id
+router.get('/:id', getUserById);
 
-// POST /volunteers - Create a new volunteer
-router.post('/', createVolunteer);
+// POST /users - Create a new user
+router.post('/', createUser);
 
-// PUT /volunteers/:id - Update a volunteer by ID
-router.put('/:id', updateVolunteer);
+// PUT /users/:id - Update a user by id
+router.put('/:id', updateUser);
 
-// DELETE /volunteers/:id - Delete a volunteer by ID
-router.delete('/:id', deleteVolunteer);
+// DELETE /users/:id - Delete a user by id
+router.delete('/:id', deleteUser);
 
-export { router as volunteerRouter };
+export { router as userRouter };

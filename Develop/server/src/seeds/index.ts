@@ -1,18 +1,14 @@
-import { seedVolunteers } from './volunteer-seeds.js';
-import { seedWork } from './work-seeds.js';
+import { seedUsers } from './seeds.js';
 import { sequelize } from '../models/index.js';
 
 const seedAll = async (): Promise<void> => {
   try {
     await sequelize.sync({ force: true });
     console.log('\n----- DATABASE SYNCED -----\n');
-    
-    await seedVolunteers();
-    console.log('\n----- VOLUNTEERS SEEDED -----\n');
-    
-    await seedWork();
-    console.log('\n----- WORK SEEDED -----\n');
-    
+
+    await seedUsers();
+    console.log('\n----- USERS SEEDED -----\n');
+
     process.exit(0);
   } catch (error) {
     console.error('Error seeding database:', error);
@@ -20,4 +16,4 @@ const seedAll = async (): Promise<void> => {
   }
 };
 
-seedAll();
+ seedAll();

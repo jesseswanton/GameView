@@ -1,15 +1,24 @@
 import dotenv from 'dotenv';
-dotenv.config();
+ dotenv.config();
 
 import { Sequelize } from 'sequelize';
-import { VolunteerFactory } from './volunteer.js';
-import { WorkFactory } from './work.js';
+import { UserFactory } from './user.js';
 
-// TODO: Create sequelize connection
+const sequelize = process.env.DB_URL
+  ? new Sequelize(process.env.DB_URL)
+  : new Sequelize(
+      process.env.DB_NAME || '',
+      process.env.DB_USER || '',
+      process.env.DB_PASSWORD,
+      {
+        host: 'localhost',
+        dialect: 'postgres',
+        dialectOptions: {
+          decimalNumbers: true,
+        },
+      }
+    );
 
-const sequelize = '';
+const User = UserFactory(sequelize);
 
-
-// TODO: Create a One-to-Many relationship (Volunteer can have numerous volunteer works)
-
-export { sequelize, Volunteer, Work };
+export { sequelize, User };
