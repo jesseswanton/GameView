@@ -46,7 +46,7 @@ const Navbar = () => {
         <Dropdown label="Platform" items={platforms} onItemSelect={handleItemSelect} />
       </div>
 
-     
+      
 
       <div className="button-container">
         {loginCheck && (
