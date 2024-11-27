@@ -9,11 +9,8 @@ import SearchPage from "./pages/SearchPage.tsx";
 import Home from "./pages/Home.tsx";
 import RegisterForm from "./pages/RegisterUserForm.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
-<<<<<<< HEAD
-import PasswordUpdate from "./pages/ResetPassword.tsx";
-=======
 import Favorites from "./pages/Favorites.tsx";
->>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
+
 
 // Create the router
 const router = createBrowserRouter([
@@ -42,17 +39,10 @@ const router = createBrowserRouter([
         path: "forgotPassword",
         element: <ForgotPassword />, // Route for password recovery
       },
-      {
-<<<<<<< HEAD
-        path: "resetPassword",
-        element: <PasswordUpdate />, // Route for password recovery
-      },
-      
-=======
+     {
         path: "favorites",
         element: <Favorites />, // Route for favorites
       },
->>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
     ],
   },
 ]);

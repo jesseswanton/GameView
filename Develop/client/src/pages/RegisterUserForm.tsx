@@ -31,10 +31,7 @@ const RegisterForm = () => {
       const data = response.data as { message: string };
       console.log("Response: ", data);
       if (data.message === 'Username is available') {
-<<<<<<< HEAD
      
-=======
->>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
         setUsernameAvailable(true);
       } else {
         setUsernameAvailable(false);
@@ -52,14 +49,10 @@ const RegisterForm = () => {
       [name]: value,
     });
     if (name === 'username') {
-<<<<<<< HEAD
       if(!checkUsernameAvailability(value)) {
         setError('Username is already taken.');
       } else {
         setError(null);
-=======
-      checkUsernameAvailability(value);
->>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
     }
   }
 

@@ -39,7 +39,6 @@ const Navbar = () => {
           className="navbar-logo-img"
         />
       </Link>
-<<<<<<< HEAD
       <div className="navbar-dropdowns">
         {/* Use the Dropdown component for Genre, Rating, and Platform */}
         <Dropdown label="Genre" items={genres} onItemSelect={handleItemSelect} />
@@ -47,8 +46,7 @@ const Navbar = () => {
         <Dropdown label="Platform" items={platforms} onItemSelect={handleItemSelect} />
       </div>
 
-      <div>
-=======
+     
 
       <div className="button-container">
         {loginCheck && (
@@ -72,7 +70,6 @@ const Navbar = () => {
           </button>
         )}
 
->>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
         {!loginCheck ? (
           <button className='btn' type='button' style={{ backgroundColor: 'black', color: 'white' }} 
           title="Click to view your data and game list">
