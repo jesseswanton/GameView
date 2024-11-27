@@ -8,6 +8,7 @@ const generateToken = (username) => {
     const secretKey = process.env.JWT_SECRET_KEY || ''; // Get the secret key from .env
     return jwt.sign({ username }, secretKey, { expiresIn: '1h' }); // Create JWT with an expiration time
 };
+console.log("secretKey: ", process.env.JWT_SECRET_KEY, jwt.sign);
 // Check if username is available
 router.post('/check-username', async (req, res) => {
     const { username } = req.body;
@@ -31,6 +32,7 @@ router.post('/check-username', async (req, res) => {
         return res.status(500).json({ message: 'Failed to check username availability' });
     }
 });
+//register user
 const register = async (req, res) => {
     const { username, password, confirmPassword, email } = req.body;
     const existingUser = await User.findOne({
@@ -54,6 +56,7 @@ const register = async (req, res) => {
         return res.status(500).json({ message: 'Failed to register user' });
     }
 };
+//login user
 export const login = async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({
@@ -69,6 +72,7 @@ export const login = async (req, res) => {
     const token = generateToken(user.username); // Generate the JWT for the user
     return res.json({ token }); // Send the token back to the client
 };
+//reset password
 export const resetPassword = async (req, res) => {
     const { email, tempPassword } = req.body;
     const token = req.headers.authorization?.split(' ')[1]; // Extract token from Authorization header

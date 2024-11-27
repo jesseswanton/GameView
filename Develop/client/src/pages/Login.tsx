@@ -64,6 +64,7 @@ const Login = () => {
         } else {
           setPasswordError(null);
         }
+        {passwordError && <p className="error-message">{passwordError}</p>}
       }, 500);
     }
   };
@@ -84,6 +85,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
 
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setRegisterError(null); //clears errors
     if (registerData.password !== registerData.confirmPassword) {
       setRegisterError('Passwords do not match!');
       console.error('Passwords do not match!');
@@ -188,7 +190,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
             </div>
           </div>
           <div>
-           {passwordError && <p className="error-message">{passwordError}</p>} 
+            
           </div>
           {registerError && <div className="error-message">{registerError}</div>}
           <div className="form-group">

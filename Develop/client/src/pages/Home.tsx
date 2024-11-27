@@ -53,29 +53,20 @@ const Home: React.FC = () => {
 
   const fetchGames = async () => {
     try {
-      const response = await fetch("https://api.igdb.com/v4/games", {
-        method: "POST",
-        headers: {
-          "Client-ID": import.meta.env.VITE_IGDB_CLIENT_ID,
-          Authorization: `Bearer ${import.meta.env.VITE_IGDB_ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fields: "id, name, genres.name, release_dates.date",
-          limit: 10,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch games");
-      }
-
-      const data = await response.json();
-      setGameArray(data);
-    } catch (err) {
-      console.error("Failed to retrieve games:", err);
+      const response = await fetch(`https://api.rawg.io/api/games?dates=2019-10-10,2020-10-10&ordering=-added&key=${import.meta.env.VITE_RAWG_KEY}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    const data = await response.json();
+    console.log(data)
+    if (data) {
+      setGameArray(data.results)
     }
+  } catch (error) {
+    console.log(error)
+  }
   };
+
 
   const handleDelete: MouseEventHandler<HTMLButtonElement> = (event) => {
     const gameId = Number(event.currentTarget.value);
