@@ -8,6 +8,8 @@ import "../styles/login.css";
 import { GameData } from "../interfaces/Data";
 import { useNavigate, Link } from "react-router-dom";
 
+
+
 const Home: React.FC = () => {
   // Login state
   const [users, setUsers] = useState<UserData[]>([]);
@@ -82,27 +84,31 @@ const Home: React.FC = () => {
     navigate("/search-video", { state: { searchQuery: "Reviews for " + "Baulder's Gate 3" } });
   };
 
+
+
   if (error) {
     return <ErrorPage />;
   }
 
-  return (
-    <>
+    return (
+    
+      <>
+    
       {!loginCheck ? (
         <div className="login-notice">
-          <h3>Please log in to view user data and game lists.</h3>
+          {/* <h3>Please log in to view user data and game lists.</h3> */}
         </div>
       ) : (
         <UserList users={users} />
       )}
 
       <div className="main-list">
-        <h2>Video game categories returned by the IGDB API:</h2>
+        <h3>Video game categories returned by the IGDB API:</h3>
         <button onClick={handleNavigateToSearch}>Search for Example Query</button>
         <div>
-          <Link to="/games">Click here to see the full game list!</Link>
+          <Link to="/games"> Click here to see the full game list!</Link>
         </div>
-
+        
         {gameArray.length > 0 ? (
           <div className="game-list">
             {gameArray.map((game) => (
