@@ -33,7 +33,7 @@ const generateTempPassword = (length = 8) => {
 //   }
 // };
 const resetPassword = async (email: string, tempPassword: string) => {
-  const token = localStorage.getItem('jwtToken');  // Get the JWT token from localStorage
+  const token = localStorage.getItem('id_token');  // Get the JWT token from localStorage
 
   try {
     const response = await fetch('/api/reset-password', {

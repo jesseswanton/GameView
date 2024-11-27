@@ -1,24 +1,24 @@
-//import interfaces
-// import { YoutubeData } from "../interfaces/YoutubeData";
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+const API_URL = "https://www.googleapis.com/youtube/v3/search";
 
-// // After the API loads, call a function to enable the search box.
-// function handleAPILoaded() {
-//   $('#search-button').attr('disabled', false);
-// }
+export const fetchVideos = async (query: string, maxResults: number = 10) => {
+  if (!query.trim()) {
+    throw new Error("Query is empty.");
+  }
 
-// // Search for a specified string.
-// function search() {
-//   var q = $('#query').val();
-//   var request = gapi.client.youtube.search.list({
-//     q: q,
-//     part: 'snippet'
-//   });
+  const url = `${API_URL}?part=snippet&type=video&maxResults=${maxResults}&q=${encodeURIComponent(
+    query
+  )}&key=${API_KEY}`;
 
-//   request.execute(function(response) {
-//     var str = JSON.stringify(response.result);
-//     $('#search-container').html('<pre>' + str + '</pre>');
-//   });
-// }
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Error fetching data: ${response.statusText}`);
+  }
 
-// //export methods
-// export { handleAPILoaded, search };
+  const data = await response.json();
+  if (!data.items) {
+    throw new Error("No videos found.");
+  }
+
+  return data.items;
+};

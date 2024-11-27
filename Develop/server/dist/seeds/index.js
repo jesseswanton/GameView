@@ -1,4 +1,5 @@
-import { seedUsers } from './seeds.js';
+import { seedUsers } from './user-seeds.js';
+import { seedFavorites } from './favorite-seeds.js';
 import { sequelize } from '../models/index.js';
 const seedAll = async () => {
     try {
@@ -6,6 +7,8 @@ const seedAll = async () => {
         console.log('\n----- DATABASE SYNCED -----\n');
         await seedUsers();
         console.log('\n----- USERS SEEDED -----\n');
+        await seedFavorites();
+        console.log('\n----- FAVORITES SEEDED -----\n');
         process.exit(0);
     }
     catch (error) {

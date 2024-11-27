@@ -18,7 +18,7 @@ const login = async (userInfo: UserLogin) => {
     if (!response.ok) {
       throw new Error('User information not retrieved, check network tab!');
     }
-
+    
     return data;
   } catch (err) {
     console.log('Error from user login: ', err);
@@ -64,7 +64,7 @@ export const forgotPasswordRequest = async ({ email }: { email: string }) => {
     if (!response.ok) {
       throw new Error('Password reset request failed, check network tab!');
     }
-
+    
     return data;
   } catch (err) {
     console.log('Error from forgot password request: ', err);

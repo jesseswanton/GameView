@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { userRouter } from './user-routes.js';
-//import { registerUser } from '../../controllers/authControllers.js';
+import favoritesRouter from './favorite-routes.js';
 
 
- const router = Router();
+const router = Router();
 
 router.use('/users', userRouter);
-//router.post('/auth/register', registerUser);
+router.use('/favorites', favoritesRouter);
 
 export default router;

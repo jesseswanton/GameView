@@ -73,7 +73,7 @@ export const resetPassword = async (req, res) => {
     const { email, tempPassword } = req.body;
     const token = req.headers.authorization?.split(' ')[1]; // Extract token from Authorization header
     if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' }); // If token is missing, respond with Unauthorized
+        return res.status(401).json({ message: 'Unauthorized, token is missing' });
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY || ''); // Verify the token using secret key
