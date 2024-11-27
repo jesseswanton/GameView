@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
+import GameViewLogo from "/GameView.png";
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -17,8 +18,14 @@ const Navbar = () => {
   }, [loginCheck]);
 
   return (
-    <div className='display-flex justify-space-between align-center py-2 px-5 mint-green'>
-      <h2>Game View</h2>
+    <nav className='navbar display-flex justify-space-between align-center py-2 px-5 dark-gray'>
+        <Link to="/" className="navbar-logo">
+        <img
+          src={GameViewLogo}
+          alt="GameView Logo"
+          className="navbar-logo-img"
+        />
+      </Link>
       <div>
         {!loginCheck ? (
           <button className='btn' type='button' style={{ backgroundColor: 'black', color: 'white' }}>
@@ -41,7 +48,7 @@ const Navbar = () => {
             </button>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 
