@@ -1,39 +1,60 @@
-import  { useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { getFavorites, removeFavorite } from '../api/favoritesAPI'; // Import API functions
+import GameCard from '../components/GameCard';
 
-interface Cardprops {
-    id: number;
-    name: string;
-    image: string;
-  
-}
+const Favorites = () => {
+  const [favorites, setFavorites] = useState<string[]>([]);  // Store gameIds
+  const [error, setError] = useState<string | null>(null);
 
-const GameCard: React.FC<Cardprops> = ({ id, name, image }) => {
-     const [isFavorite, setIsFavorite] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem('id_token'); // Get token from localStorage
 
-     const handeFavoriteToggle = async () => {
+    const fetchFavorites = async () => {
+      if (token) {
         try {
-            const newFavoriteState = !isFavorite;
-            setIsFavorite(newFavoriteState);
-            
-           await axios.post('/api/favorites', {
-                gameId: id,
-                favorite: newFavoriteState,
-            });
-
-            } catch (error) {
-            console.error('Error toggling favorite:', error);
+          const data = await getFavorites(token);  // Fetch favorite games
+          setFavorites(data.map((fav: { gameId: string }) => fav.gameId));  // Update state
+        } catch (err) {
+          setError('Error fetching favorites');
+          console.error(err);
         }
+      }
     };
 
-    return (
-        <div className='card'>
-            <img src={image} alt={name} />
-            <h3>{name}</h3>
-            <button onClick={handeFavoriteToggle}>
-                {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-            </button>
-        </div>
-    );}
+    fetchFavorites();
+  }, []);
 
-    export default GameCard;
+  const handleRemoveFavorite = async (gameId: string) => {
+    const token = localStorage.getItem('id_token');
+    if (token) {
+      try {
+        await removeFavorite(gameId, token);  // Remove game from favorites
+        setFavorites(favorites.filter(id => id !== gameId));  // Update state after removal
+      } catch (err) {
+        setError('Error removing favorite');
+        console.error(err);
+      }
+    }
+  };
+
+  return (
+    <div>
+      <h1>Your Favorite Games</h1>
+      {error && <p>{error}</p>}
+      <div className="favorites-list">
+        {favorites.length > 0 ? (
+          favorites.map((gameId) => (
+            <div key={gameId}>
+              <GameCard gameId={gameId} />
+              <button onClick={() => handleRemoveFavorite(gameId)}>Remove</button>
+            </div>
+          ))
+        ) : (
+          <p>No favorite games found.</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Favorites;

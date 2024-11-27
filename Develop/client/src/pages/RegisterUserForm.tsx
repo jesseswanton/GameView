@@ -5,8 +5,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../styles/Login.css';
 import { validateEmail } from '../utils/helpers';
 import axios from 'axios';
-
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const RegisterForm = () => {
   const [registerData, setRegisterData] = useState({
@@ -23,7 +22,8 @@ const RegisterForm = () => {
   const [usernameAvailable, setUsernameAvailable] = useState<boolean | null>(null);
   const [registerError, setRegisterError] = useState<string | null>(null);
 
-  
+  const navigate = useNavigate(); // Initialize navigate
+
   const checkUsernameAvailability = async (username: string) => {
     setIsCheckingUsername(true);
     try {
@@ -31,32 +31,35 @@ const RegisterForm = () => {
       const data = response.data as { message: string };
       console.log("Response: ", data);
       if (data.message === 'Username is available') {
+<<<<<<< HEAD
      
+=======
+>>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
         setUsernameAvailable(true);
-      //  return true
       } else {
         setUsernameAvailable(false);
-      //  return false
       }
     } catch (error) {
       console.log('Error checking username availability:', error);
       setUsernameAvailable(false);
-    //  return false
     }
   };
-  
 
   const handleRegisterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-     const { name, value } = e.target;
+    const { name, value } = e.target;
     setRegisterData({
       ...registerData,
       [name]: value,
     });
     if (name === 'username') {
+<<<<<<< HEAD
       if(!checkUsernameAvailability(value)) {
         setError('Username is already taken.');
       } else {
         setError(null);
+=======
+      checkUsernameAvailability(value);
+>>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
     }
   }
 
@@ -67,18 +70,18 @@ const RegisterForm = () => {
         setError(null);
       }
     }
-  
   };
 
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
-      if (registerData.password !== registerData.confirmPassword) {
-        setRegisterError('Passwords do not match!');
-        return;
+    if (registerData.password !== registerData.confirmPassword) {
+      setRegisterError('Passwords do not match!');
+      return;
     }
     try {
       const data = await register(registerData);
       Auth.login(data.token);
+      navigate('/favorites'); // Navigate to the favorites page after successful registration
     } catch (err) {
       console.log("Error: ", err);
       setRegisterError('Registration failed. Please try again.');
@@ -97,11 +100,9 @@ const RegisterForm = () => {
           onChange={handleRegisterChange}
           className="form-input"
         />
-         {isCheckingUsername && <p>Checking username...</p>}
-         {usernameAvailable === false && <p className='error-message'>Username is already taken</p>}
-        {usernameAvailable === true && <p className='success-message'>Username is available</p>}
-      
-
+        {isCheckingUsername && <p>Checking username...</p>}
+        {usernameAvailable === false && <p className="error-message">Username is already taken</p>}
+        {usernameAvailable === true && <p className="success-message">Username is available</p>}
       </div>
       <div className="form-group">
         <label>Email</label>
@@ -112,7 +113,7 @@ const RegisterForm = () => {
           onChange={handleRegisterChange}
           className="form-input"
         />
-           {error && <p className='error-message'>{error}</p>} 
+        {error && <p className="error-message">{error}</p>}
       </div>
       <div className="form-group">
         <label>Password</label>
@@ -124,65 +125,45 @@ const RegisterForm = () => {
           className="form-input"
         />
       </div>
-      <div className='form-group'>
-            <label>Password</label>
-            <div className="password-wrapper">
-              <input
-                className='form-input'
-                type={registerPasswordVisible ? 'text' : 'password'}
-                name='password'
-                value={registerData.password || ''}
-                onChange={handleRegisterChange}
-                autoComplete="on"
-              />
-              <span
-                className="eye-icon"
-                onClick={() => setRegisterPasswordVisible(!registerPasswordVisible)}
-              >
-                {registerPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-          </div>
+      <div className="form-group">
+        <label>Password</label>
+        <div className="password-wrapper">
+          <input
+            className="form-input"
+            type={registerPasswordVisible ? 'text' : 'password'}
+            name="password"
+            value={registerData.password || ''}
+            onChange={handleRegisterChange}
+            autoComplete="on"
+          />
+          <span
+            className="eye-icon"
+            onClick={() => setRegisterPasswordVisible(!registerPasswordVisible)}
+          >
+            {registerPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
+      </div>
       <div className="form-group">
         <label>Confirm Password</label>
-            <div className="password-wrapper">
-              <input
-                className="form-input"
-                type={confirmPasswordVisible ? 'text' : 'password'}
-                name="confirmPassword"
-                autoComplete="on"
-                value={registerData.confirmPassword || ''}
-                onChange={handleRegisterChange}
-              />
-              <span
-                className="eye-icon"
-                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
-              >
-                {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-           </div>
-      {/* <div className='form-group'>
-            <label>Password</label>
-            <div className="password-wrapper">
-              <input
-                className='form-input'
-                type={registerPasswordVisible ? 'text' : 'password'}
-                name='password'
-                value={registerData.password || ''}
-                onChange={handleRegisterChange}
-                autoComplete="on"
-              />
-              <span
-                className="eye-icon"
-                onClick={() => setRegisterPasswordVisible(!registerPasswordVisible)}
-              >
-                {registerPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-          </div> */}
+        <div className="password-wrapper">
+          <input
+            className="form-input"
+            type={confirmPasswordVisible ? 'text' : 'password'}
+            name="confirmPassword"
+            autoComplete="on"
+            value={registerData.confirmPassword || ''}
+            onChange={handleRegisterChange}
+          />
+          <span
+            className="eye-icon"
+            onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+          >
+            {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
+      </div>
       {registerError && <div className="error-message">{registerError}</div>}
-      {registerError ? <div className="error-message">{registerError}</div> : null}
       <div className="form-group">
         <button type="submit" className="btn btn-primary">
           Register

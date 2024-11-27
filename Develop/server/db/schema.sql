@@ -3,3 +3,12 @@ DROP DATABASE IF EXISTS gameview_db;
 
 -- CREATE DATABASE
 CREATE DATABASE gameview_db;
+
+-- Create favorites table
+CREATE TABLE favorites (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  game_id VARCHAR(255) NOT NULL,                           
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

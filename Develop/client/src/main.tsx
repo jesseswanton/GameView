@@ -5,14 +5,15 @@ import "./styles/index.css";
 import App from "./App.tsx";
 import Login from "./pages/Login.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
-import GameList from "./components/GameList.tsx"; // Displays a list of games
-import GameCard from "./components/GameCard.tsx";
 import SearchPage from "./pages/SearchPage.tsx";
-import VideoPage from "./pages/VideoPage.tsx";
 import Home from "./pages/Home.tsx";
 import RegisterForm from "./pages/RegisterUserForm.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
+<<<<<<< HEAD
 import PasswordUpdate from "./pages/ResetPassword.tsx";
+=======
+import Favorites from "./pages/Favorites.tsx";
+>>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
 
 // Create the router
 const router = createBrowserRouter([
@@ -26,27 +27,8 @@ const router = createBrowserRouter([
         element: <Home />, // Default route
       },
       {
-        path: "games",
-        element: <GameList />, // Route for showing a list of games
-      },
-      {
-        path: "new-game",
-        element: (
-          <GameCard
-            id={0}
-            name={""}
-            genres={[]}
-            handleDelete={() => console.log("Delete game")}
-          />
-        ), // Route for creating a new game
-      },
-      {
         path: "search-video",
         element: <SearchPage />, // Route for searching videos
-      },
-      {
-        path: "display-video",
-        element: <VideoPage />, // Route for displaying a video
       },
       {
         path: "login",
@@ -61,10 +43,16 @@ const router = createBrowserRouter([
         element: <ForgotPassword />, // Route for password recovery
       },
       {
+<<<<<<< HEAD
         path: "resetPassword",
         element: <PasswordUpdate />, // Route for password recovery
       },
       
+=======
+        path: "favorites",
+        element: <Favorites />, // Route for favorites
+      },
+>>>>>>> 7ef4c31bfe3cd6f0254711c74a6bca00e5488d97
     ],
   },
 ]);

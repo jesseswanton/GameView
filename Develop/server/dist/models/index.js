@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './user.js';
+import { FavoriteFactory } from './favorite.js';
 const sequelize = process.env.DB_URL
     ? new Sequelize(process.env.DB_URL)
     : new Sequelize(process.env.DB_NAME || '', process.env.DB_USER || '', process.env.DB_PASSWORD, {
@@ -12,4 +13,5 @@ const sequelize = process.env.DB_URL
         },
     });
 const User = UserFactory(sequelize);
-export { sequelize, User };
+const Favorite = FavoriteFactory(sequelize);
+export { sequelize, User, Favorite };

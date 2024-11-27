@@ -3,8 +3,25 @@
   width: auto;
 }
 
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button-container .btn {
+  margin-right: 10px;
+}
+
+
 .dark-gray {
   background-color: #bebebe;
+}
+
+.game-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 }
 
  html {

@@ -1,34 +1,14 @@
-import { Link } from "react-router-dom";
+import React from 'react';
 
 interface GameCardProps {
-  id: number;
-  name: string;
-  genres: [];
-  releaseDates?: { date: string }[];
-  handleDelete: () => void;
+  gameId: string;
 }
 
-const GameCard = ({ id, name, genres, releaseDates }: GameCardProps) => {
+const GameCard: React.FC<GameCardProps> = ({ gameId }) => {
   return (
     <div className="game-card">
-      <div className="game-card-details">
-        <h3>{name}</h3>
-        <h4>Genres: {genres?.map((g: { name: string; }) => g.name).join(", ") || "N/A"}</h4>
-        <div>
-          Release Dates: {releaseDates?.map((d) => d.date).filter(Boolean).join(", ") || "N/A"}
-        </div>
-      </div>
-      <button>
-        <Link to={`/edit-game/${id}`}>
-          Edit
-        </Link>
-      </button>
-      <button
-        value={String(id)}
-        aria-label={`Delete game: ${name}`}
-      >
-        Delete
-      </button>
+      <h3>Game ID: {gameId}</h3>
+      {/* You can later add more details like game name, image, etc. */}
     </div>
   );
 };
