@@ -1,0 +1,149 @@
+/* Dropdown button */
+.custom-dropdown .dropdown-toggle {
+    padding: 10px 20px;
+    background-color: #007bff;  /* Blue background for the button */
+    color: white;                /* Text color */
+    border: 1px solid #007bff;  /* Border around the button */
+    border-radius: 4px;          /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-dropdown .dropdown-toggle:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Dropdown menu */
+  .custom-dropdown .dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;  /* Space between button and menu */
+    width: 200px;  /* Width of the dropdown menu */
+    z-index: 1000;
+    display: block;
+    padding: 0;
+  }
+  
+  /* Dropdown items */
+  .custom-dropdown .dropdown-item {
+    display: block;
+    padding: 10px;
+    color: #333;  /* Text color */
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-dropdown .dropdown-item:hover {
+    background-color: #f1f1f1;  /* Light grey background on hover */
+  }
+  
+  /* Add some spacing between dropdown items */
+  .custom-dropdown .dropdown-item + .dropdown-item {
+    border-top: 1px solid #e0e0e0;  /* Border between items */
+  }
+  /* Ensure the dropdown button and dropdown menu are aligned properly */
+.dropdown {
+    position: relative;
+    display: inline-block; 
+    width: 20%;
+  }
+  
+  .dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Align the dropdown directly below the button */
+    left: 0;
+    display: block;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 400px; /* Set the width of the dropdown */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa; /* Light hover effect */
+  }
+  
+  .dropdown-item:active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .dropdown-container {
+    width: 200px; /* Control the width of the dropdown and button */
+    display: block; /* Stack the button and menu vertically */
+    margin: 10px 0; /* Optional margin for spacing */
+  }
+  
+  .dropdown-container .btn {
+    display: block; /* Makes the button take full width and stack vertically */
+    width: 100%; /* Ensure the button takes full width of the container */
+    padding: 10px; /* Adjust padding for better button size */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer;
+    text-align: left; /* Align text to the left */
+  }
+
+  /* Style for the dropdown container */
+.dropdown-container {
+    width: 200px; /* Control the width of the dropdown and button */
+    display: block; /* Stack the button and menu vertically */
+    margin: 10px 0; /* Optional margin for spacing */
+  }
+  
+  /* Style for the dropdown button */
+  .dropdown-container .btn {
+    display: block; /* Makes the button take full width and stack vertically */
+    width: 100%; /* Ensure the button takes full width of the container */
+    padding: 10px; /* Adjust padding for better button size */
+    font-size: 20px; /* Adjust font size */
+    cursor: pointer;
+    text-align: left; /* Align text to the left */
+  }
+  
+  /* Dropdown menu */
+  .dropdown-container .dropdown-menu {
+    display: block; /* Ensure dropdown menu is shown below the button */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    width: 50%; /* Ensure the dropdown takes full width */
+  }
+  
+  /* Style for dropdown items */
+  .dropdown-container .dropdown-item {
+    display: block; /* Ensure each item is block level */
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for dropdown items */
+  .dropdown-container .dropdown-item:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+    color: #007bff; /* Change text color on hover */
+  }
+  
+  /* Active effect for selected dropdown item */
+  .dropdown-container .dropdown-item:active {
+    background-color: #007bff;
+    color: white;
+  }
+  
