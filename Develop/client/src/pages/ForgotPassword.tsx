@@ -14,8 +14,10 @@ const generateTempPassword = (length = 8) => {
 };
 
 const resetPassword = async (email: string, tempPassword: string) => {
-  const token = import.meta.env.VITE_JWT_SECRET;  // Get the JWT token from environment variables
- console.log("token: ", token);
+  const token = localStorage.getItem('id_token');  // Get the JWT token from localStorage
+
+//   const token = import.meta.env.VITE_JWT_SECRET;  // Get the JWT token from environment variables
+//  console.log("token: ", token);
   try {
     const response = await fetch('/api/reset-password', {
       method: 'POST',

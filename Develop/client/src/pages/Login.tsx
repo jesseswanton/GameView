@@ -1,19 +1,19 @@
 import { useState, type FormEvent, type ChangeEvent, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Auth from '../utils/auth';
 import { login, register } from '../api/authAPI';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import type { UserLogin } from '../interfaces/UserLogin';
 import type { UserRegister } from '../interfaces/UserRegister'
-//import ForgotPassword from './ForgotPassword'; 
 import { validateEmail } from '../utils/helpers';
 
 import '../styles/Login.css';
 
 const Login = () => {
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
+  // const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-
 
   const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
@@ -23,25 +23,20 @@ const Login = () => {
   const [registerData, setRegisterData] = useState<UserRegister>({
     username: '',
     password: '',
-    confirmPassword: '', // To confirm that both passwords match
+    confirmPassword: '',
     email: '',
   });
 
-  //to have an eye icon to show/hide password
   const [loginPasswordVisible, setLoginPasswordVisible] = useState(false);
   const [registerPasswordVisible, setRegisterPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [registerError, setRegisterError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
- // Error states for login and registration
- const [loginError, setLoginError] = useState<string | null>(null);
- const [registerError, setRegisterError] = useState<string | null>(null);
- const [emailError, setEmailError] = useState<string | null>(null);
- const [passwordError, setPasswordError] = useState<string | null>(null);
-
-  const handleLoginChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleLoginChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setLoginData({
       ...loginData,
@@ -62,32 +57,32 @@ const Login = () => {
         setEmailError(null);
       }
     }
-        // Clear password error if passwords match
-        if (name === 'password' || name === 'confirmPassword') {
-          setTimeout(() => {
-            if (registerData.password !== registerData.confirmPassword) {
-              setPasswordError('Passwords do not match!');
-            } else {
-              setPasswordError(null);
-            }
-          }, 500); // Adjust the delay as needed
+    if (name === 'password' || name === 'confirmPassword') {
+      setTimeout(() => {
+        if (registerData.password !== registerData.confirmPassword) {
+          setPasswordError('Passwords do not match!');
+        } else {
+          setPasswordError(null);
         }
-        {passwordError && <p className="error-message">{passwordError}</p>}  
+        {passwordError && <p className="error-message">{passwordError}</p>}
+      }, 500);
+    }
   };
 
-  const handleLoginSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoginError(null);
-    try {
-      const data = await login(loginData);
-      Auth.login(data.token);
-    } catch (err) {
-      setLoginError('Failed to login, check your username and password');
-      console.error('Failed to login', err);
-    }
-    
-  };
- 
+const handleLoginSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+  setLoginError(null);
+  try {
+    const data = await login(loginData);
+    Auth.login(data.token);
+    console.log('Auth token saved:', localStorage.getItem('id_token'));
+    navigate('/');  // Redirect after the token is set
+  } catch (err) {
+    setLoginError('Failed to login, check your username and password');
+    console.error('Failed to login', err);
+  }
+};
+
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setRegisterError(null); //clears errors
@@ -101,13 +96,14 @@ const Login = () => {
       const data = await register(registerData);
       console.log("Returned Data: ", data);
       Auth.login(data.token);
+      navigate('/'); // Redirect to favorites page on successful registration
     } catch (err) {
       console.log("Error: ", err);
       setRegisterError('Failed to register');
       console.error('Failed to register', err);
     }
-    
   };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (formRef.current && !formRef.current.contains(event.target as Node)) {
@@ -124,7 +120,6 @@ const Login = () => {
 
   return (
     <div className='form-container'>
-      {/* The video background */}
       <div className="video-background">
         <video autoPlay loop muted>
           <source src="/video.mp4" type="video/mp4" />
@@ -132,9 +127,6 @@ const Login = () => {
         </video>
       </div>
 
-      {/* The login form */}{
-        isForgotPassword
-      }
       {isRegistering ? (
         <form className='form login-form' onSubmit={handleRegisterSubmit}>
           <h1>Register an account</h1>
@@ -214,7 +206,6 @@ const Login = () => {
           </p>
         </form>
       ) : (
-        // Login Form
         <form className="form login-form" onSubmit={handleLoginSubmit}>
           <h1>Login to view profile</h1>
           <div className="form-group">
@@ -258,18 +249,16 @@ const Login = () => {
               Register here
             </a>
           </p>
-          <p>
+          {/* <p>
             Forgot your password?{' '}
             <a href="/forgotPassword" onClick={() => setIsForgotPassword(true)}>
               Reset it here
             </a>
-                     
-          </p>
+          </p> */}
         </form>
       )}
     </div>
   );
 };
-
 
 export default Login;

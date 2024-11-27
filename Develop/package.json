@@ -36,6 +36,7 @@
     "@types/axios": "^0.9.36",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "emailjs-com": "^3.2.0",
     "express": "^4.21.1",
     "import": "^0.0.6",

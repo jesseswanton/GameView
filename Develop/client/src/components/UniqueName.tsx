@@ -18,7 +18,7 @@ const UsernameForm: React.FC<Props> = ({ onSubmit }) => {
 
       try {
         const response = await axios.get(`/api/check-username?username=${username}`);
-        setIsUsernameAvailable(response.data.isAvailable);
+        setIsUsernameAvailable((response.data as { isAvailable: boolean }).isAvailable);
       } catch (error) {
         console.error('Error checking username availability:', error);
         setIsUsernameAvailable(false);

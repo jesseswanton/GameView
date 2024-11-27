@@ -99,7 +99,7 @@ export const resetPassword = async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(' ')[1];  // Extract token from Authorization header
 
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });  // If token is missing, respond with Unauthorized
+    return res.status(401).json({ message: 'Unauthorized, token is missing' });
   }
 
   try {

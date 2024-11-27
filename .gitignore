@@ -7,17 +7,20 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Dependency directories
-node_modules
+node_modules/
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Build output
-client/dist
-server/dist
-client/build
-server/build
+client/dist/
+server/dist/
+client/build/
+server/build/
 
 # Environment variables
 .env
+.env.*
 
 # Temporary files
 *.tmp
