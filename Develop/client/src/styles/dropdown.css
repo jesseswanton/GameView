@@ -18,6 +18,7 @@
   
   .dropdown-btn:hover {
     background-color: #444;
+    color: red;
   }
   
   /* Dropdown Menu Styling */
