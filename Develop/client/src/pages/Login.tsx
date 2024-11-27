@@ -200,7 +200,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
           </div>
           <p>
             Already have an account?{' '}
-            <a href="#" onClick={() => setIsRegistering(false)}>
+            <a href="#" onClick={() => setIsRegistering(false)}style={{ color: 'white', backgroundColor: 'black' }}>
               Login
             </a>
           </p>
@@ -245,7 +245,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
           </div>
           <p>
             Don't have an account?{' '}
-            <a href="#" onClick={() => setIsRegistering(true)}>
+            <a href="#" onClick={() => setIsRegistering(true)} style={{ color: 'white', backgroundColor: 'black' }}>
               Register here
             </a>
           </p>
