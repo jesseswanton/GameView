@@ -77,8 +77,6 @@ export const login = async (req, res) => {
     const token = generateToken(user.username); // Generate the JWT for the user
     return res.json({ token }); // Send the token back to the client
 };
-<<<<<<< HEAD
-=======
 //reset password
 export const resetPassword = async (req, res) => {
     const { email, tempPassword } = req.body;
@@ -104,7 +102,6 @@ export const resetPassword = async (req, res) => {
         return res.status(403).json({ message: 'Forbidden' }); // If verification fails, respond with Forbidden
     }
 };
->>>>>>> b36ff1a3886d5a5e037a4c6c6ac2b5e1d2599e27
 // POST /login - Login a user
 router.post('/login', login);
 // POST /register - Register a new user

@@ -1,0 +1,57 @@
+/* Dropdown Container */
+.navbar-dropdowns {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Dropdown Button Styling */
+  .dropdown-btn {
+    background-color: black;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+  }
+  
+  .dropdown-btn:hover {
+    background-color: #444;
+  }
+  
+  /* Dropdown Menu Styling */
+  .dropdown-menu {
+    position: absolute;
+    top: 50px; /* Adjust according to your navbar height */
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 4px;
+    z-index: 1000;
+
+  }
+  
+  .dropdown-menu li {
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Dropdown Item Click Styling */
+  .dropdown-menu li:active {
+    background-color: #ddd;
+  }
+  
+  /* Position of dropdown menu */
+  .dropdown {
+    position: relative;
+  }
+  

@@ -64,6 +64,7 @@ const router = createBrowserRouter([
         path: "resetPassword",
         element: <PasswordUpdate />, // Route for password recovery
       },
+      
     ],
   },
 ]);
