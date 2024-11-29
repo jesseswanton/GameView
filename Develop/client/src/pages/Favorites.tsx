@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getFavorites, removeFavorite } from '../api/favoritesAPI'; // Import API functions
 import GameCard from '../components/GameCard';
+import auth from '../utils/auth';
+import { Link } from 'react-router-dom';
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState<string[]>([]);  // Store gameIds
@@ -39,7 +41,14 @@ const Favorites = () => {
 
   return (
     <div>
-      <h1>Your Favorite Games</h1>
+      <h2 className="pb-5">
+          Hey {auth.getProfile().username}!
+      </h2>
+      <Link to="/"> <button>Check out some other games</button>
+      </Link>
+      <h3>
+        Your Favorite Games
+      </h3>
       {error && <p>{error}</p>}
       <div className="favorites-list">
         {favorites.length > 0 ? (

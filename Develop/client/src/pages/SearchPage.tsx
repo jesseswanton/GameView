@@ -36,7 +36,7 @@ const SearchPage: React.FC = () => {
 
       <h2>{query}</h2>
 
-      <button onClick={handleNavigate}>Go back</button>
+      <button onClick={handleNavigate}>Check out some other games</button>
 
       <div>
         {videos.map((video, index) => (
