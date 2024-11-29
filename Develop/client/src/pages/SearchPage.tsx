@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { fetchVideos } from "../api/YoutubeAPI";
 import { Video } from "../interfaces/VideoInterface";
 import he from "he";
+import { HiArrowLeft } from "react-icons/hi";
 
 const SearchPage: React.FC = () => {
   const location = useLocation();
@@ -36,11 +37,11 @@ const SearchPage: React.FC = () => {
 
       <h2>{query}</h2>
 
-      <button onClick={handleNavigate}>Go back</button>
+      <HiArrowLeft size={25} onClick={handleNavigate}>Go back</HiArrowLeft>
 
       <div>
         {videos.map((video, index) => (
-          <div key={video.id.videoId || index} className="video">
+          <div key={video.id.videoId || index} className="video border-0">
             <img
               src={video.snippet.thumbnails.default.url}
               alt={video.snippet.title}

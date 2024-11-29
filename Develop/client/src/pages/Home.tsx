@@ -97,9 +97,7 @@ const Home: React.FC = () => {
             {gameArray.map((game, index) => (
               <div onClick={(event) => handleNavigateToSearch(event)} key={index} className="card">
                 <img className="card-img"  src={game.background_image} alt={`${game.name} cover art`} />
-                <div className="card-img-overlay" >
                   <h3 className="card-title">{game.name}</h3>
-                </div>
               </div>
             ))}
 
