@@ -1,8 +1,8 @@
 export interface GameData {
-  id: number;
   name: string;
+  background_image: string;
   genres?: Genre[];
-  releaseDates?: { date: string }[];
+  released?: { date: string }[];
 }
 
 export interface Genre {

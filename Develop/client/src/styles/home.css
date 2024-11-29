@@ -1,0 +1,41 @@
+.main {
+    max-width: 90%;
+}
+
+.game-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    width: 15rem;
+    border-radius: 15px;
+    border: none;
+}
+
+.card:hover {
+    border: black 5px;
+    transition: 500ms;
+}
+
+.card img {
+    width: 100%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+
+h2, h3, h4 {
+    font-size: 16px;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 16px;
+    }
+    .card {
+        width: 9rem;
+
+    }
+}

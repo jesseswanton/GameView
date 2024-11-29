@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useLayoutEffect, MouseEventHandler } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
 import UserList from "../components/Users";
 import auth from "../utils/auth";
-import "../styles/login.css";
+import "../styles/home.css"
 import { GameData } from "../interfaces/Data";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   // Login state
@@ -67,19 +67,14 @@ const Home: React.FC = () => {
   }
   };
 
-
-  const handleDelete: MouseEventHandler<HTMLButtonElement> = (event) => {
-    const gameId = Number(event.currentTarget.value);
-    if (!isNaN(gameId)) {
-      setGameArray((prevGames) => prevGames.filter((game) => game.id !== gameId));
-    }
-  };
-
   // Navigation with example query
 
   const navigate = useNavigate();
-  const handleNavigateToSearch = () => {
-    navigate("/search-video", { state: { searchQuery: "Reviews for " + "Baulder's Gate 3" } });
+  const handleNavigateToSearch = (event: React.MouseEvent<HTMLElement>) => {
+    const gameName = event.currentTarget.querySelector("h3")?.innerText;
+    if (gameName) {
+      navigate("/search-video", { state: { searchQuery: "Reviews for " + gameName } });
+    }
   };
 
   if (error) {
@@ -90,35 +85,21 @@ const Home: React.FC = () => {
     <>
       {!loginCheck ? (
         <div className="login-notice">
-          <h3>Please log in to view user data and game lists.</h3>
+          <h1>Please log in to view user data and game lists.</h1>
         </div>
       ) : (
         <UserList users={users} />
       )}
 
       <div className="main-list">
-        <h2>Video game categories returned by the IGDB API:</h2>
-        <button onClick={handleNavigateToSearch}>Search for Example Query</button>
-        <div>
-          <Link to="/games">Click here to see the full game list!</Link>
-        </div>
-
         {gameArray.length > 0 ? (
           <div className="game-list">
-            {gameArray.map((game) => (
-              <div key={game.id} className="game-details">
-                <h3>{game.name}</h3>
-                <h4>Genres: {game.genres?.map((g) => g.name).join(", ") || "N/A"}</h4>
-                <div>
-                  Release Dates:{" "}
-                  {game.releaseDates?.map((d) => new Date(d.date).toLocaleDateString()).join(", ") || "Unknown"}
+            {gameArray.map((game, index) => (
+              <div onClick={(event) => handleNavigateToSearch(event)} key={index} className="card">
+                <img className="card-img"  src={game.background_image} alt={`${game.name} cover art`} />
+                <div className="card-img-overlay" >
+                  <h3 className="card-title">{game.name}</h3>
                 </div>
-                <Link to={"/edit-game"} state={{ id: game.id }}>
-                  <button>Edit</button>
-                </Link>
-                <button value={String(game.id)} onClick={handleDelete}>
-                  Delete
-                </button>
               </div>
             ))}
 
