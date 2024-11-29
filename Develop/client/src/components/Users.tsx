@@ -15,7 +15,7 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
     return (
         <>
             <h2 className="pb-5">
-               Hey {auth.getProfile().username}
+               Hey {auth.getProfile().username}!
             </h2>
             {users && users.map((user) => (
                 <div className="row align-center mb-5" key={user.id}>
