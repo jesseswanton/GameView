@@ -2,11 +2,16 @@ import { Router } from 'express';
 import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+// import { Pool } from 'pg';
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+// });
 const router = Router();
 // This function is triggered during login or registration
 const generateToken = (username) => {
     const secretKey = process.env.JWT_SECRET_KEY || ''; // Get the secret key from .env
     return jwt.sign({ username }, secretKey, { expiresIn: '1h' }); // Create JWT with an expiration time
+    console.log("Token generated: ", generateToken);
 };
 console.log("secretKey: ", process.env.JWT_SECRET_KEY, jwt.sign);
 // Check if username is available

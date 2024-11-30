@@ -11,6 +11,7 @@ import RegisterForm from "./pages/RegisterUserForm.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
 import Favorites from "./pages/Favorites.tsx";
 
+
 // Create the router
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
         path: "forgotPassword",
         element: <ForgotPassword />, // Route for password recovery
       },
-      {
+     {
         path: "favorites",
         element: <Favorites />, // Route for favorites
       },

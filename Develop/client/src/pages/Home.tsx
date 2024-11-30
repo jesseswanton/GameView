@@ -8,6 +8,8 @@ import "../styles/home.css"
 import { GameData } from "../interfaces/Data";
 import { useNavigate } from "react-router-dom";
 
+
+
 const Home: React.FC = () => {
   // Login state
   const [users, setUsers] = useState<UserData[]>([]);
@@ -77,15 +79,19 @@ const Home: React.FC = () => {
     }
   };
 
+
+
   if (error) {
     return <ErrorPage />;
   }
 
-  return (
-    <>
+    return (
+    
+      <>
+    
       {!loginCheck ? (
         <div className="login-notice">
-          <h1>Please log in to view user data and game lists.</h1>
+          {/* <h3>Please log in to view user data and game lists.</h3> */}
         </div>
       ) : (
         <UserList users={users} />

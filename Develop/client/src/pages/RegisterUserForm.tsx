@@ -31,6 +31,7 @@ const RegisterForm = () => {
       const data = response.data as { message: string };
       console.log("Response: ", data);
       if (data.message === 'Username is available') {
+     
         setUsernameAvailable(true);
       } else {
         setUsernameAvailable(false);
@@ -48,10 +49,14 @@ const RegisterForm = () => {
       [name]: value,
     });
     if (name === 'username') {
-      checkUsernameAvailability(value);
+      if(!checkUsernameAvailability(value)) {
+        setError('Username is already taken.');
+      } else {
+        setError(null);
     }
+  }
 
-    if (name === 'email') {
+  if (name === 'email') {
       if (!validateEmail(value)) {
         setError('Please enter a valid email address.');
       } else {
