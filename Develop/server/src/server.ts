@@ -1,32 +1,39 @@
-import express from 'express';
-import routes from './routes/index.js';
-import { sequelize } from './models/index.js';
-import dotenv from 'dotenv';
-import { QueryTypes } from 'sequelize';
-import cors from 'cors';
+import express from "express";
+import routes from "./routes/index.js";
+import { sequelize } from "./models/index.js";
+import dotenv from "dotenv";
+import { QueryTypes } from "sequelize";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 const forceDatabaseRefresh = false;
 
-const allowedOrigins = ['http://localhost:3000', 'https://your-production-url.com'];
-app.use(cors({
-  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET, POST, PUT, DELETE',
-  allowedHeaders: 'Content-Type, Authorization',
-  credentials: true,
-}));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://your-production-url.com",
+];
+app.use(
+  cors({
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void
+    ) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET, POST, PUT, DELETE",
+    allowedHeaders: "Content-Type, Authorization",
+    credentials: true,
+  })
+);
 
-
-app.use(express.static('../client/dist'));
+app.use(express.static("../client/dist"));
 app.use(express.json());
 app.use(routes);
 
@@ -58,7 +65,7 @@ const createDatabaseIfNotExist = async () => {
     // Close the connection to the default database
     await defaultSequelize.close();
   } catch (error) {
-    console.error('Error while checking or creating the database:', error);
+    console.error("Error while checking or creating the database:", error);
     process.exit(1);
   }
 };
@@ -68,12 +75,15 @@ createDatabaseIfNotExist().then(() => {
   const sequelizeUrl = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/${process.env.DB_NAME}`;
   const newSequelize = new sequelize.Sequelize(sequelizeUrl);
 
-  newSequelize.sync({ force: forceDatabaseRefresh }).then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is listening on port ${PORT}`);
+  newSequelize
+    .sync({ force: forceDatabaseRefresh })
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server is listening on port ${PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.error("Failed to sync database:", error);
+      process.exit(1);
     });
-  }).catch((error) => {
-    console.error('Failed to sync database:', error);
-    process.exit(1); 
-  });
 });

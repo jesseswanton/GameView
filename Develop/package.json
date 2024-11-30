@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm i && npm run seed && npm run build && npm run start:dev",
     "start": "npm run client:build && npm run server",
-    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3002 && npm run client:dev\"",
+    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3000 && npm run client:dev\"",
     "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
     "install": "cd server && npm i && cd ../client && npm i",
@@ -29,6 +29,7 @@
     "@types/pg": "^8.11.10",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.7",
+    "rollup": "^4.27.4",
     "wait-on": "^7.2.0"
   },
   "dependencies": {

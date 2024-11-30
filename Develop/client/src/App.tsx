@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <main className='container pt-5'>
+      <main className='container main pt-5'>
         <Outlet />
       </main>
     </div>
