@@ -158,7 +158,7 @@ const RegisterForm = () => {
       </div>
       {registerError && <div className="error-message">{registerError}</div>}
       <div className="form-group">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary"style={{ color: 'white', backgroundColor: 'black' }}>
           Register
         </button>
       </div>
