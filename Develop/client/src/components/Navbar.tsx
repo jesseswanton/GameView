@@ -4,7 +4,6 @@ import auth from '../utils/auth';
 import GameViewLogo from "/GameView.png";
 import '../styles/dropdown.css';
 
-
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
 
@@ -19,8 +18,6 @@ const Navbar = () => {
   }, [loginCheck]);
 
   return (
-
-
     <nav className='navbar display-flex justify-space-between align-center py-2 px-5 dark-gray'>
       <Link to="/" className="navbar-logo">
         <img
@@ -30,24 +27,13 @@ const Navbar = () => {
         />
       </Link>
 
-      
-
       <div className="button-container">
         {loginCheck && (
-          <button
-            className='btn'
-            type='button'
-            style={{
-              backgroundColor: 'black',
-              color: 'white',
-              marginRight: '10px',
-            }}
-          >
+          <button className='btn' type='button'>
             <Link
               to='/favorites'
-              style={{ color: 'white', textDecoration: 'none' }}
-              onMouseOver={(e) => e.currentTarget.style.color = 'red'}
-              onMouseOut={(e) => e.currentTarget.style.color = 'white'}
+              className='btn-link'
+              title="Click to view your favorites"
             >
               Favorites
             </Link>
@@ -55,11 +41,8 @@ const Navbar = () => {
         )}
 
         {!loginCheck ? (
-          <button className='btn' type='button' style={{ backgroundColor: 'black', color: 'white' }} 
-          title="Click to view your data and game list">
-            <Link to='/login' style={{ color: 'white', textDecoration: 'none' }} 
-              onMouseOver={(e) => e.currentTarget.style.color = 'red'} 
-              onMouseOut={(e) => e.currentTarget.style.color = 'white'}>
+          <button className='btn' type='button' title="Click to view your data and game list">
+            <Link to='/login' className='btn-link' title="Click to login">
               Login
             </Link>
           </button>
@@ -68,9 +51,6 @@ const Navbar = () => {
             className='btn'
             type='button'
             title="Goodbye!"
-            style={{ backgroundColor: 'black', color: 'white' }}
-            onMouseOver={(e) => e.currentTarget.style.color = 'red'} 
-            onMouseOut={(e) => e.currentTarget.style.color = 'white'}
             onClick={() => {
               auth.logout();
             }}

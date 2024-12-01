@@ -1,6 +1,34 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #3a3a3a;
+  color: white;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
 .navbar-logo-img {
-  height: 72px;
-  width: auto;
+  height: 50px;
+}
+
+.navbar-dropdowns {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-item {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.navbar-item:hover {
+  text-decoration: none;
 }
 
 .button-container {
@@ -13,6 +41,34 @@
   margin-right: 10px;
 }
 
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.video-list .video {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.close-button {
+  align-self: flex-end;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: none;
+  border: 1px;
+  border-color: #000000;
+  color: red;
+  font-size: 16px;
+}
 
 .dark-gray {
   background-color: #bebebe;
@@ -22,6 +78,23 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
+  flex: 1;
+}
+
+.game-list-container {
+  display: flex;
+  gap: 20px;
+}
+
+.game-details {
+  flex: 1;
+  min-width: 300px;
+}
+
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
  html {
@@ -33,6 +106,7 @@
 
 body {
   margin: 0;
+  background-color: #cfcfcf;
 }
 
 main {
@@ -933,22 +1007,30 @@ a:hover {
 }
 
 .btn {
-  text-align: center;
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  margin: 0;
-  text-decoration: none;
-  font-size: 1rem;
-  border-radius: 0.3rem;
-  border: 1px solid transparent;
-  outline: none;
-  color: #1a1a1a;
-  background-color: #aeaeae;
-  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #cecece;
+  background-color: #3a3a3a;
+  color: red;
+  text-decoration: none;
+}
+
+.btn-link {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  color: red;
+  text-decoration: none;
 }
 
 .btn.btn-squared {
@@ -1043,6 +1125,16 @@ a:hover {
   background-color: #31a9e1;
 }
 
+.success-message {
+  color: green;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
 .card {
   border: 1px solid #1a1a1a;
   margin-bottom: 1rem;
@@ -1069,6 +1161,14 @@ a:hover {
 
 .card.card-rounded .card-header {
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
+}
+
+.card-title {
+  font-size: 1.2rem;
+}
+
+.game-details .card {
+  margin-left: 20px;
 }
 
 form {
@@ -1677,7 +1777,7 @@ form [type='radio'] {
 
 .video img {
   margin-right: 15px;
-  max-width: 120px;
+  max-width: 200px;
 }
 
 .video h3 {

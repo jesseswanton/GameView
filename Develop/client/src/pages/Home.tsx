@@ -138,11 +138,13 @@ const Home: React.FC = () => {
     return (
       <>
       {!loginCheck ? (
-        <div className="login-notice">
-          {/* <h3>Please log in to view user data and game lists.</h3> */}
+        <div className="title">
+          <h3>
+            Log in to save a list of your favorite games.
+          </h3>
         </div>
-      ) : (
-        <UserList users={users} />
+  ) : (
+        <UserList users={users}/>
       )}
       <div className="container main-list">
       <div className="filter-search">
@@ -175,7 +177,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div>No games available!</div>
+          <div>Loading games!</div>
         )}
       </div>
     </>

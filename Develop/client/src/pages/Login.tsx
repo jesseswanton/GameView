@@ -36,6 +36,8 @@ const Login = () => {
   const [emailError, setEmailError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
 
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
   const handleLoginChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setLoginData({
@@ -118,17 +120,23 @@ const handleLoginSubmit = async (e: FormEvent) => {
     };
   }, []);
 
+  const handleVideoLoaded = () => {
+    setIsVideoLoaded(true);
+  };
+
   return (
     <div className='form-container'>
       <div className="video-background">
-        <video autoPlay loop muted>
+      <video autoPlay loop muted onLoadedData={handleVideoLoaded}>
           <source src="/video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
 
-      {isRegistering ? (
-        <form className='form login-form' onSubmit={handleRegisterSubmit}>
+      {isVideoLoaded && (
+        <div className={`form-wrapper ${isVideoLoaded ? 'fade-in' : ''}`}>
+          {isRegistering ? (
+            <form className='form login-form' onSubmit={handleRegisterSubmit}>
           <h1>Register an account</h1>
           <div className='form-group'>
             <label>Username</label>
@@ -207,7 +215,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
         </form>
       ) : (
         <form className="form login-form" onSubmit={handleLoginSubmit}>
-          <h1>Login to view profile</h1>
+          <h1>Log in</h1>
           <div className="form-group">
             <label>Username</label>
             <input
@@ -243,9 +251,11 @@ const handleLoginSubmit = async (e: FormEvent) => {
               Login
             </button>
           </div>
+          <br></br>
           <p>
             Don't have an account?{' '}
-            <a href="#" onClick={() => setIsRegistering(true)} style={{ color: 'white', backgroundColor: 'black' }}>
+            <br></br>
+            <a href="#" onClick={() => setIsRegistering(true)} style={{ color: 'white'}}>
               Register here
             </a>
           </p>
@@ -255,10 +265,13 @@ const handleLoginSubmit = async (e: FormEvent) => {
               Reset it here
             </a>
           </p> */}
-        </form>
+      </form>
+          )}
+        </div>
       )}
     </div>
   );
 };
+
 
 export default Login;
