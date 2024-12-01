@@ -24,6 +24,8 @@
 ![alt text](Develop/assets/game_view.png)
 ![alt text](Develop/assets/register_user.png)
 ![alt text](Develop/assets/login.png)
+![alt text](Develop/assets/reviews.png)
+
 
   ## Install
 
