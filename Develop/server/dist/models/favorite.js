@@ -7,6 +7,7 @@ export function FavoriteFactory(sequelize) {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
+            allowNull: false,
         },
         userId: {
             type: DataTypes.INTEGER,
@@ -16,7 +17,7 @@ export function FavoriteFactory(sequelize) {
                 key: 'id',
             },
         },
-        gameId: {
+        gameName: {
             type: DataTypes.STRING,
             allowNull: false,
         },

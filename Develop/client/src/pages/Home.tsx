@@ -90,7 +90,7 @@ const Home: React.FC = () => {
       <>
     
       {!loginCheck ? (
-        <div className="login-notice">
+        <div className="title">
           <h3>
             Log in to save a list of your favorite games.
           </h3>
@@ -111,7 +111,7 @@ const Home: React.FC = () => {
 
           </div>
         ) : (
-          <div>No games available!</div>
+          <div>Loading games!</div>
         )}
       </div>
     </>

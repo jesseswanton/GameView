@@ -1,17 +1,19 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Model, Sequelize, Optional } from 'sequelize';
 
 export interface FavoriteAttributes {
   id: number;
   userId: number;
-  gameId: string;
+  gameName: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export class Favorite extends Model<FavoriteAttributes> implements FavoriteAttributes {
+export type FavoriteCreationAttributes = Optional<FavoriteAttributes, 'id'>;
+
+export class Favorite extends Model<FavoriteAttributes, FavoriteCreationAttributes> implements FavoriteAttributes {
   public id!: number;
   public userId!: number;
-  public gameId!: string;
+  public gameName!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
 }
@@ -23,6 +25,7 @@ export function FavoriteFactory(sequelize: Sequelize): typeof Favorite {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
       },
       userId: {
         type: DataTypes.INTEGER,
@@ -32,7 +35,7 @@ export function FavoriteFactory(sequelize: Sequelize): typeof Favorite {
           key: 'id',
         },
       },
-      gameId: {
+      gameName: {
         type: DataTypes.STRING,
         allowNull: false,
       },

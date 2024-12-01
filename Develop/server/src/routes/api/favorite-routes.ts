@@ -9,8 +9,8 @@ const router = express.Router();
 router.use(authenticateToken);  // All routes after this will require authentication
 
 // Check if the game is favorited by the logged-in user
-router.get('/:gameId', async (req, res) => {
-  const { gameId } = req.params;
+router.get('/:gameName', async (req, res) => {
+  const { gameName } = req.params;
   const { username } = req.user!;  // Get the current user from the token
 
   try {
@@ -19,9 +19,9 @@ router.get('/:gameId', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Find if the game is in the user's favorites (using gameId as a string)
+    // Find if the game is in the user's favorites (using gameName as a string)
     const favorite = await Favorite.findOne({
-      where: { userId: user.id, gameId: gameId },
+      where: { userId: user.id, gameName: gameName },
     });
 
     return res.json({ isFavorite: favorite !== null });
@@ -33,7 +33,7 @@ router.get('/:gameId', async (req, res) => {
 
 // Add or remove a game from the user's favorites
 router.post('/', async (req, res) => {
-  const { gameId, favorite } = req.body;
+  const { gameName, favorite } = req.body;
   const { username } = req.user!;  // Get the current user from the token
 
   try {
@@ -42,9 +42,9 @@ router.post('/', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Check if the game is in the user's favorites (using gameId as a string)
+    // Check if the game is in the user's favorites (using gameName as a string)
     const favoriteEntry = await Favorite.findOne({
-      where: { userId: user.id, gameId: gameId },
+      where: { userId: user.id, gameName: gameName },
     });
 
     if (favorite) {
@@ -52,8 +52,7 @@ router.post('/', async (req, res) => {
       if (!favoriteEntry) {
         await Favorite.create({
           userId: user.id,
-          gameId: gameId,  // Store gameId as a string in the database
-          id: 0,            // assuming 'id' is auto-generated in your DB
+          gameName: gameName,  // Store gameName as a string in the database
           createdAt: new Date(),
           updatedAt: new Date(),
         });
@@ -92,8 +91,8 @@ router.get('/', async (req, res) => {
 });
 
 // Remove a specific game from a user's favorites
-router.delete('/:gameId', async (req, res) => {
-  const { gameId } = req.params;
+router.delete('/:gameName', async (req, res) => {
+  const { gameName } = req.params;
   const { username } = req.user!;  // Get the current user from the token
 
   try {
@@ -104,7 +103,7 @@ router.delete('/:gameId', async (req, res) => {
 
     // Find the game in the user's favorites
     const favoriteEntry = await Favorite.findOne({
-      where: { userId: user.id, gameId: gameId },
+      where: { userId: user.id, gameName: gameName },
     });
 
     if (!favoriteEntry) {
