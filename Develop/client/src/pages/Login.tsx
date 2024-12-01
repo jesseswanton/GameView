@@ -215,7 +215,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
         </form>
       ) : (
         <form className="form login-form" onSubmit={handleLoginSubmit}>
-          <h1>Login to view profile</h1>
+          <h1>Log in</h1>
           <div className="form-group">
             <label>Username</label>
             <input
@@ -251,9 +251,11 @@ const handleLoginSubmit = async (e: FormEvent) => {
               Login
             </button>
           </div>
+          <br></br>
           <p>
             Don't have an account?{' '}
-            <a href="#" onClick={() => setIsRegistering(true)} style={{ color: 'white', backgroundColor: 'black' }}>
+            <br></br>
+            <a href="#" onClick={() => setIsRegistering(true)} style={{ color: 'white'}}>
               Register here
             </a>
           </p>

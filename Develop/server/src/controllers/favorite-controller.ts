@@ -3,10 +3,10 @@ import { Favorite } from '../models/favorite.js';
 
 // Add a favorite for the authenticated user
 export const addFavorite = async (req: Request, res: Response) => {
-  const { gameId } = req.body;  // Game ID to add to favorites
+  const { gameName } = req.body;  // Game ID to add to favorites
   const userId = Number(req.user?.username);  // Get user ID from the token and convert to number
 
-  if (!gameId) {
+  if (!gameName) {
     return res.status(400).json({ message: 'Game ID is required' });
   }
 
@@ -15,7 +15,7 @@ export const addFavorite = async (req: Request, res: Response) => {
   }
 
   try {
-    const favorite = await Favorite.create({ userId, gameId, id: 0, createdAt: new Date(), updatedAt: new Date() });
+    const favorite = await Favorite.create({ userId, gameName, id: 0, createdAt: new Date(), updatedAt: new Date() });
     return res.status(201).json(favorite);
   } catch (error) {
     console.error('Error adding favorite:', error);
@@ -25,10 +25,10 @@ export const addFavorite = async (req: Request, res: Response) => {
 
 // Remove a favorite for the authenticated user
 export const removeFavorite = async (req: Request, res: Response) => {
-  const { gameId } = req.body;  // Game ID to remove from favorites
+  const { gameName } = req.body;  // Game ID to remove from favorites
   const userId = req.user?.username;  // Get user ID from the token
 
-  if (!gameId) {
+  if (!gameName) {
     return res.status(400).json({ message: 'Game ID is required' });
   }
 
@@ -37,7 +37,7 @@ export const removeFavorite = async (req: Request, res: Response) => {
   }
 
   try {
-    const favorite = await Favorite.findOne({ where: { userId, gameId } });
+    const favorite = await Favorite.findOne({ where: { userId, gameName } });
     if (!favorite) {
       return res.status(404).json({ message: 'Favorite not found' });
     }

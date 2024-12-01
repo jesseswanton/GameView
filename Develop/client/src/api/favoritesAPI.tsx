@@ -23,7 +23,7 @@ export const getFavorites = async (token: string) => {
 };
 
 // Function to add or remove a game from favorites
-export const toggleFavorite = async (gameId: string, isFavorite: boolean, token: string) => {
+export const toggleFavorite = async (gameName: string, isFavorite: boolean, token: string) => {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -31,7 +31,7 @@ export const toggleFavorite = async (gameId: string, isFavorite: boolean, token:
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ gameId, favorite: isFavorite }),
+      body: JSON.stringify({ gameName, favorite: isFavorite }),
     });
 
     if (!response.ok) {
@@ -46,9 +46,9 @@ export const toggleFavorite = async (gameId: string, isFavorite: boolean, token:
 };
 
 // Function to remove a game from favorites
-export const removeFavorite = async (gameId: string, token: string) => {
+export const removeFavorite = async (gameName: string, token: string) => {
   try {
-    const response = await fetch(`${API_URL}/${gameId}`, {
+    const response = await fetch(`${API_URL}/${gameName}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
