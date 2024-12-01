@@ -8,6 +8,7 @@ import "../styles/home.css"
 import Dropdown from '../components/Dropdown';  
 import { GameData } from "../interfaces/Data";
 import { useNavigate } from "react-router-dom";
+import { fetchGames } from "../api/rawgAPI";
 import { HiSearch, HiOutlineStar } from "react-icons/hi";
 
 
@@ -49,27 +50,24 @@ const Home: React.FC = () => {
   const [dataCheck, setDataCheck] = useState(true);
   const [query, setQuery] = useState('dates=2023-01-01%2C2024-11-30');
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     if (dataCheck) {
-      fetchGames();
+      getGames();
       setDataCheck(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataCheck]);
 
-  const fetchGames = async () => {
+  const getGames = async () => {
     try {
-      const response = await fetch(`https://api.rawg.io/api/games?${query}&page_size=50&page=1&key=${import.meta.env.VITE_RAWG_KEY}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-    const data = await response.json();
-    if (data) {
-      setGameArray(data.results)
+      const games = await fetchGames(query, page);
+      setGameArray(games);
+    } catch (error) {
+      console.error("Failed to retrieve games:", error);
+      setError(true);
     }
-  } catch (error) {
-    console.log(error)
-  }
   };
 
   // Navigation with example query
@@ -97,22 +95,22 @@ const Home: React.FC = () => {
         item = 'action';
         break;
       case "Adventure":
-        // Handle Adventure genre selection
+        item = 'adventure';
         break;
       case "RPG":
-        // Handle RPG genre selection
+        item = 'role-playing-games-rpg';
         break;
       case "Shooter":
-        // Handle Shooter genre selection
+        item = 'shooter';
         break;
       case "Strategy":
-        // Handle Strategy genre selection
+        item = 'strategy';
         break;
       default:
         break;
     }
-    setQuery(`genres=${item.toLowerCase()}`);
-    fetchGames();
+    setQuery(`genres=${item.toLowerCase()}&ordering=-released`);
+    setDataCheck(true);
   };
 
   const handleSearch = () => {
@@ -128,6 +126,11 @@ const Home: React.FC = () => {
     }
   } 
 
+  const handlePageChange = (page: number) => {
+    setPage(page);
+    setDataCheck(true);
+  }
+
   if (error) {
     return <ErrorPage />;
   }
@@ -141,7 +144,7 @@ const Home: React.FC = () => {
       ) : (
         <UserList users={users} />
       )}
-      <div className="main-list">
+      <div className="container main-list">
       <div className="filter-search">
         <div className="search-bar">
           <input
@@ -161,12 +164,15 @@ const Home: React.FC = () => {
           <div className="game-list">
             {gameArray.map((game, index) => (
               <div onClick={(event) => handleNavigateToSearch(event)} key={index} className="card">
-                <HiOutlineStar className="favorite" size={20} stroke="yellow"></HiOutlineStar>
+                <HiOutlineStar className="favorite" size={20} stroke="#fef08a"></HiOutlineStar>
                 <img className="card-img"  src={game.background_image} alt={`${game.name} cover art`} />
                   <h3 className="card-title">{game.name}</h3>
               </div>
             ))}
-
+            <div className="page-select">
+              <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
+              <button onClick={() => handlePageChange(page + 1)}>Next</button>
+            </div>
           </div>
         ) : (
           <div>No games available!</div>

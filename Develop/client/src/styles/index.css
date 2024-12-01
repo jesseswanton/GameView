@@ -383,12 +383,12 @@ button {
 }
 
 a {
-  color: #1b89bc;
+  color: white;
   text-decoration: none;
 }
 
 a:hover {
-  color: #065b83;
+  cursor: pointer;
   text-decoration: underline;
 }
 
@@ -1685,9 +1685,9 @@ form [type='radio'] {
 }
 
 .video p {
-  margin: 0;
+  margin: 10px;
   font-size: 0.9em;
-  color: #555;
+  color: white;
 }
 
 .video a {

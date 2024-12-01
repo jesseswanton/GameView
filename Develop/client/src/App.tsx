@@ -4,9 +4,9 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div>
+    <div style={{backgroundColor: "#212a31"}}>
       <Navbar />
-      <main className='container main pt-5'>
+      <main className='main'>
         <Outlet />
       </main>
     </div>
