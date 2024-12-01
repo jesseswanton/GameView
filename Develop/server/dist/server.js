@@ -6,7 +6,11 @@ import { QueryTypes } from "sequelize";
 import cors from "cors";
 dotenv.config();
 const app = express();
+<<<<<<< HEAD
+const PORT = process.env.PORT || 3001;
+=======
 const PORT = process.env.PORT || 3002;
+>>>>>>> origin
 const forceDatabaseRefresh = false;
 const allowedOrigins = [
     "http://localhost:3000",

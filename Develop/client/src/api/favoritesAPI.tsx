@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3002/api/favorites';
+const API_URL = 'http://localhost:3001/api/favorites';
 
 // Function to get all favorite games
 export const getFavorites = async (token: string) => {

@@ -1,11 +1,14 @@
 /* Dropdown Container */
-.navbar-dropdowns {
-    display: flex;
-    gap: 20px;
-  }
-  
-  /* Dropdown Button Styling */
-  .dropdown-btn {
+.filter-search {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+/* Dropdown Button Styling */
+/* .dropdown-btn {
     background-color: black;
     color: white;
     padding: 8px 15px;
@@ -14,45 +17,74 @@
     border-radius: 4px;
     transition: background-color 0.3s;
     cursor: pointer;
-  }
-  
-  .dropdown-btn:hover {
-    background-color: #444;
-    color: red;
-  }
-  
-  /* Dropdown Menu Styling */
-  .dropdown-menu {
-    position: absolute;
-    top: 50px; /* Adjust according to your navbar height */
-    background-color: white;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    min-width: 160px;
-    list-style: none;
-    padding: 10px 0;
-    margin: 0;
-    border-radius: 4px;
-    z-index: 1000;
+  } */
 
-  }
-  
-  .dropdown-menu li {
-    padding: 8px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .dropdown-menu li:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Dropdown Item Click Styling */
-  .dropdown-menu li:active {
-    background-color: #ddd;
-  }
-  
-  /* Position of dropdown menu */
-  .dropdown {
-    position: relative;
-  }
-  
+.dropdown-btn:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.dropdown-btn:active,
+.search-button {
+  scale: .9;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  position: absolute;
+  top: 25px; /* Adjust according to your navbar height */
+  background-color: white;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 160px;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+}
+
+/* Dropdown Item Click Styling */
+.dropdown-menu li:active {
+  background-color: #ddd;
+}
+
+/* Position of dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+.search {
+  padding: 8px 8px 8px 16px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-button {
+  position: absolute;
+  right: 10px;
+}
+
+.search-button:hover {
+  cursor:pointer;
+  color: red;
+}
+
+.search-button:active {
+  scale: .9;
+}

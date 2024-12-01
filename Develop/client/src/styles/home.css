@@ -1,18 +1,47 @@
+@keyframes appear {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    scale:1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(500px) scale(.2);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
 .main {
+  display: flex;
   width: 90%;
 }
 
 .main-list {
+  margin-top: 1.5rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .game-list {
+  animation: slideIn 1.5s ease-in-out backwards;
   display: grid;
   grid-template-columns: min-content min-content;
 }
 
 .card {
+  animation: appear 1s linear;
   margin: 8px;
   transition: 500ms;
   position: relative;
@@ -39,7 +68,7 @@
 }
 
 .card-title {
-  text-shadow: 1px 1px 2px #d5312c;
+  text-shadow: 2px 2px 2px #d5312c;
   color: white;
   z-index: 5;
   position: absolute;
@@ -52,6 +81,18 @@ h3,
 h4 {
   padding-left: 8px;
   font-size: 16px;
+}
+
+.favorite {
+  margin: 4px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.favorite:hover {
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -76,5 +117,10 @@ h4 {
 @media (min-width: 1250px) {
   .game-list {
     grid-template-columns: min-content min-content min-content min-content;
+  }
+}
+@media (min-width: 1550px) {
+  .game-list {
+    grid-template-columns: min-content min-content min-content min-content min-content;
   }
 }
