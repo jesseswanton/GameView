@@ -4,13 +4,14 @@ import { fetchVideos } from "../api/YoutubeAPI";
 import { Video } from "../interfaces/VideoInterface";
 import he from "he";
 import { HiArrowLeft } from "react-icons/hi";
+import "../styles/gamePage.css"
 
 const SearchPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const initialQuery = location.state?.searchQuery || "";
-  const [query] = useState(initialQuery);
+  const game = location.state?.game || "";
+  const [query] = useState(game.name);
   const [videos, setVideos] = useState<Video[]>([]);
 
   useEffect(() => {
@@ -35,9 +36,12 @@ const SearchPage: React.FC = () => {
   return (
     <div>
 
-      <h2>{query}</h2>
-
+      <div className="banner">
+        <img src={game.background_image} alt={`${game.name} cover art`} />
       <HiArrowLeft size={25} onClick={handleNavigate}>Go back</HiArrowLeft>
+        <h2 className="game-title">{query}</h2>
+      </div>
+
 
       <div>
         {videos.map((video, index) => (

@@ -1,0 +1,23 @@
+main {
+    position: relative;
+}
+
+.banner {
+    position: relative;
+    overflow: hidden;
+    height: 30rem;
+}
+
+.banner img {
+    width: 100%;
+}
+
+.game-title {
+    text-shadow: 2px 2px 2px #d5312c;
+    color: white;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 48px;
+  }
