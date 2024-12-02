@@ -42,6 +42,7 @@
     "bcrypt": "^5.1.1",
     "cores": "^0.8.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "emailjs-com": "^3.2.0",
     "express": "^4.21.1",
     "import": "^0.0.6",
