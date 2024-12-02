@@ -23,7 +23,10 @@ body {
 }
 .main {
   display: flex;
-  width: 90%;
+  width: 100%;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main-list {
@@ -88,6 +91,15 @@ h4 {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 10;
+}
+
+.banner .favorite {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 1%;
   z-index: 10;
 }
 

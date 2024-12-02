@@ -125,150 +125,151 @@ const handleLoginSubmit = async (e: FormEvent) => {
   };
 
   return (
-    <div className='form-container'>
-      <div className="video-background">
-      <video autoPlay loop muted onLoadedData={handleVideoLoaded}>
-          <source src="/video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
-      {isVideoLoaded && (
-        <div className={`form-wrapper ${isVideoLoaded ? 'fade-in' : ''}`}>
-          {isRegistering ? (
-            <form className='form login-form' onSubmit={handleRegisterSubmit}>
-          <h1>Register an account</h1>
-          <div className='form-group'>
-            <label>Username</label>
-            <input
-              className='form-input'
-              type='text'
-              name='username'
-              value={registerData.username || ''}
-              onChange={handleRegisterChange}
-            />
-          </div>
-          <div className='form-group'>
-            <label>Email</label>
-            <input
-              className='form-input'
-              type='text'
-              name='email'
-              value={registerData.email || ''}
-              onChange={handleRegisterChange}
-            />
-            {emailError && <p className='error-message'>{emailError}</p>}
-          </div>
-          <div className='form-group'>
-            <label>Password</label>
-            <div className="password-wrapper">
+    <div className="login-page">
+      <div className='form-container'>
+        <div className="video-background">
+        <video autoPlay loop muted onLoadedData={handleVideoLoaded}>
+            <source src="/video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        {isVideoLoaded && (
+          <div className={`form-wrapper ${isVideoLoaded ? 'fade-in' : ''}`}>
+            {isRegistering ? (
+              <form className='form login-form' onSubmit={handleRegisterSubmit}>
+            <h1>Register an account</h1>
+            <div className='form-group'>
+              <label>Username</label>
               <input
                 className='form-input'
-                type={registerPasswordVisible ? 'text' : 'password'}
-                name='password'
-                value={registerData.password || ''}
-                onChange={handleRegisterChange}
-                autoComplete="on"
-              />
-              <span
-                className="eye-icon"
-                onClick={() => setRegisterPasswordVisible(!registerPasswordVisible)}
-              >
-                {registerPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-          </div>
-          <div className="form-group">
-            <label>Confirm Password</label>
-            <div className="password-wrapper">
-              <input
-                className="form-input"
-                type={confirmPasswordVisible ? 'text' : 'password'}
-                name="confirmPassword"
-                autoComplete="on"
-                value={registerData.confirmPassword || ''}
+                type='text'
+                name='username'
+                value={registerData.username || ''}
                 onChange={handleRegisterChange}
               />
-              <span
-                className="eye-icon"
-                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
-              >
-                {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-              </span>
             </div>
-          </div>
-          <div>
-            
-          </div>
-          {registerError && <div className="error-message">{registerError}</div>}
-          <div className="form-group">
-            <button className="btn btn-primary" type="submit">
-              Register
-            </button>
-          </div>
-          <p>
-            Already have an account?{' '}
-            <a href="#" onClick={() => setIsRegistering(false)}style={{ color: 'white', backgroundColor: 'black' }}>
-              Login
-            </a>
-          </p>
-        </form>
-      ) : (
-        <form className="form login-form" onSubmit={handleLoginSubmit}>
-          <h1>Log in</h1>
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              className="form-input"
-              type="text"
-              name="username"
-              value={loginData.username || ''}
-              onChange={handleLoginChange}
-            />
-              {loginError && <p className='error-message'>{loginError}</p>} 
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <div className="password-wrapper">
+            <div className='form-group'>
+              <label>Email</label>
+              <input
+                className='form-input'
+                type='text'
+                name='email'
+                value={registerData.email || ''}
+                onChange={handleRegisterChange}
+              />
+              {emailError && <p className='error-message'>{emailError}</p>}
+            </div>
+            <div className='form-group'>
+              <label>Password</label>
+              <div className="password-wrapper">
+                <input
+                  className='form-input'
+                  type={registerPasswordVisible ? 'text' : 'password'}
+                  name='password'
+                  value={registerData.password || ''}
+                  onChange={handleRegisterChange}
+                  autoComplete="on"
+                />
+                <span
+                  className="eye-icon"
+                  onClick={() => setRegisterPasswordVisible(!registerPasswordVisible)}
+                >
+                  {registerPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+            </div>
+            <div className="form-group">
+              <label>Confirm Password</label>
+              <div className="password-wrapper">
+                <input
+                  className="form-input"
+                  type={confirmPasswordVisible ? 'text' : 'password'}
+                  name="confirmPassword"
+                  autoComplete="on"
+                  value={registerData.confirmPassword || ''}
+                  onChange={handleRegisterChange}
+                />
+                <span
+                  className="eye-icon"
+                  onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                >
+                  {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+            </div>
+            <div>
+      
+            </div>
+            {registerError && <div className="error-message">{registerError}</div>}
+            <div className="form-group">
+              <button className="btn btn-primary" type="submit">
+                Register
+              </button>
+            </div>
+            <p>
+              Already have an account?{' '}
+              <a href="#" onClick={() => setIsRegistering(false)}style={{ color: 'white', backgroundColor: 'black' }}>
+                Login
+              </a>
+            </p>
+          </form>
+        ) : (
+          <form className="form login-form" onSubmit={handleLoginSubmit}>
+            <h1>Log in</h1>
+            <div className="form-group">
+              <label>Username</label>
               <input
                 className="form-input"
-                type={loginPasswordVisible ? 'text' : 'password'}
-                name="password"
-                autoComplete="on"
-                value={loginData.password || ''}
+                type="text"
+                name="username"
+                value={loginData.username || ''}
                 onChange={handleLoginChange}
               />
-              <span
-                className="eye-icon"
-                onClick={() => setLoginPasswordVisible(!loginPasswordVisible)}
-              >
-                {loginPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-              </span>
+                {loginError && <p className='error-message'>{loginError}</p>}
             </div>
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary" type="submit">
-              Login
-            </button>
-          </div>
-          <br></br>
-          <p>
-            Don't have an account?{' '}
+            <div className="form-group">
+              <label>Password</label>
+              <div className="password-wrapper">
+                <input
+                  className="form-input"
+                  type={loginPasswordVisible ? 'text' : 'password'}
+                  name="password"
+                  autoComplete="on"
+                  value={loginData.password || ''}
+                  onChange={handleLoginChange}
+                />
+                <span
+                  className="eye-icon"
+                  onClick={() => setLoginPasswordVisible(!loginPasswordVisible)}
+                >
+                  {loginPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+            </div>
+            <div className="form-group">
+              <button className="btn btn-primary" type="submit">
+                Login
+              </button>
+            </div>
             <br></br>
-            <a href="#" onClick={() => setIsRegistering(true)} style={{ color: 'white'}}>
-              Register here
-            </a>
-          </p>
-          {/* <p>
-            Forgot your password?{' '}
-            <a href="/forgotPassword" onClick={() => setIsForgotPassword(true)}>
-              Reset it here
-            </a>
-          </p> */}
-      </form>
-          )}
-        </div>
-      )}
+            <p>
+              Don't have an account?{' '}
+              <br></br>
+              <a href="#" onClick={() => setIsRegistering(true)} style={{ color: 'white'}}>
+                Register here
+              </a>
+            </p>
+            {/* <p>
+              Forgot your password?{' '}
+              <a href="/forgotPassword" onClick={() => setIsForgotPassword(true)}>
+                Reset it here
+              </a>
+            </p> */}
+        </form>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

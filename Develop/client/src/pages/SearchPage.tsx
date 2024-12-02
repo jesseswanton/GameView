@@ -5,7 +5,7 @@ import { toggleFavorite } from "../api/favoritesAPI";
 import auth from "../utils/auth";
 import { Video } from "../interfaces/VideoInterface";
 import he from "he";
-import { HiOutlineArrowLeft } from "react-icons/hi";
+import { HiOutlineArrowLeft, HiOutlineStar } from "react-icons/hi";
 // import { FcReddit } from "react-icons/fc";
 import "../styles/gamePage.css";
 import { fetchGameDetails } from "../api/rawgAPI";
@@ -102,8 +102,21 @@ const SearchPage: React.FC = () => {
       <div className="banner">
         <img src={game.background_image} alt={`${game.name} cover art`} />
         <div className="details">
-          <HiOutlineArrowLeft stroke="white" className="back" size={25}>Go back</HiOutlineArrowLeft>
+          <HiOutlineArrowLeft stroke="white" className="back" size={25} onClick={() => navigate(-1)}></HiOutlineArrowLeft>
           <h2 className="game-title"><a href={gameDetails?.website}>{query}</a></h2>
+          <div className="flex items-center cursor-pointer">
+        {isLoggedIn && (
+          <HiOutlineStar className="favorite" size={20} stroke="#fef08a"
+            onClick={handleAddToFavorites}
+            style={{
+              fill: successMessage ? "yellow" : "none",
+            }}
+          >
+            {successMessage || "Add Game to Favorites"}
+          </HiOutlineStar>
+        )}
+      </div>
+
           <div>{gameDetails && <p>{cleanDescription}</p>}</div>
         </div>
       </div>
@@ -130,36 +143,6 @@ const SearchPage: React.FC = () => {
         </div>
       </span>
       <div className="container">
-        {videos.map((video, index) => (
-          <div key={video.id.videoId || index} className="video border-0">
-            <img
-              src={video.snippet.thumbnails.default.url}
-              alt={video.snippet.title}
-            />
-            <h3>{he.decode(video.snippet.title)}</h3> {/* The decode is to fix the apostrophe issue in titles */}
-            <p>{he.decode(video.snippet.description)}</p>
-          </div>
-        ))}
-      <div className="flex items-center cursor-pointer">
-        <button className="btn" onClick={() => navigate(-1)}>
-          Go back
-        </button>
-
-        {isLoggedIn && (
-          <button
-            className="btn"
-            onClick={handleAddToFavorites}
-            style={{
-              backgroundColor: successMessage ? "green" : "black",
-              color: successMessage ? "white" : "white",
-            }}
-          >
-            {successMessage || "Add Game to Favorites"}
-          </button>
-        )}
-      </div>
-
-      <h1 className="title">{query}</h1>
       <br></br>
       {selectedVideo ? (
         <div className="video-player">
