@@ -13,7 +13,7 @@ const forceDatabaseRefresh = false;
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://your-production-url.com",
+  "https://gameview-ue0b.onrender.com",
 ];
 app.use(
   cors({
