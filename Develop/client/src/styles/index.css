@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 1rem;
   background-color: #3a3a3a;
@@ -42,6 +42,7 @@
 }
 
 .title {
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -155,6 +156,7 @@ abbr[title] {
 
 b,
 strong {
+  color:white;
   font-weight: bolder;
 }
 
@@ -404,6 +406,7 @@ h3,
 h4,
 h5,
 h6 {
+  color: white;
   margin: 0 0 0.5rem;
   line-height: 1.25;
 }
@@ -441,6 +444,7 @@ p {
 ul,
 ol,
 dl {
+  color: white;
   margin-top: 0;
   margin-bottom: 1rem;
 }

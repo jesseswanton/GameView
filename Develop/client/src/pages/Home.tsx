@@ -177,7 +177,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div>Loading games!</div>
+          <div style={{margin: "1 rem", color: "white"}}>Loading games!</div>
         )}
       </div>
     </>

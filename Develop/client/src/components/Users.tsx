@@ -14,7 +14,7 @@ interface UserListProps {
 const UserList: React.FC<UserListProps> = () => {
     return (
         <>
-            <h2 className="pb-5">
+            <h2 className="pt-4" style={{fontSize: "32px"}}>
                Hey {auth.getProfile().username}!
             </h2>
         </>
