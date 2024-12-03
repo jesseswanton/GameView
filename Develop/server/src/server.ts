@@ -13,7 +13,7 @@ const forceDatabaseRefresh = false;
 
 const allowedOrigins = [
   "http://localhost:3000",
-  `${process.env.DB_URL}`,
+  `${process.env.APP_URL}`,
 ];
 app.use(
   cors({
