@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 const forceDatabaseRefresh = false;
 
 const allowedOrigins = [
-  "https://gameview-qxo7.onrender.com/"
+  "https://gameview-qxo7.onrender.com/",
   "http://localhost:3000",
   "*"
 ];
