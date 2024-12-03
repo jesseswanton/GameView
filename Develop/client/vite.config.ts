@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   server: {
-    port: 10000,
+    port: 3000,
     open: true,
     proxy: {
       "/api": {
