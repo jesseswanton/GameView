@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 const forceDatabaseRefresh = false;
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://your-production-url.com",
+    `${process.env.VITE_URL}`,
 ];
 app.use(cors({
     origin: (origin, callback) => {
