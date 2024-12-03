@@ -25,7 +25,7 @@
 ![alt text](Develop/assets/register_user.png)
 ![alt text](Develop/assets/login.png)
 ![alt text](Develop/assets/reviews.png)
-
+![alt text](Develop/assets/favorits.png)
 
   ## Install
 
@@ -33,7 +33,7 @@
 
   ## Contributor
 
-   Jesse Swanton, Joseph Stone, Xincheng Ji, Michelle Voidets
+   jesseswanton, Petrichor4, Aaronnji, mvoid
 
   ## License
 
@@ -43,6 +43,6 @@
 
   If you have any questions, please contact me at: [] . 
 
-  My GitHub profile is [](https://guthub.com/).
+ Our GitHub profile is [https://github.com/jesseswanton/GameView](https://guthub.com/).
 
   Thank you for visiting my repository!
