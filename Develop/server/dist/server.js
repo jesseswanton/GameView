@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 const forceDatabaseRefresh = false;
 const allowedOrigins = [
     "http://localhost:3000",
-    `${process.env.VITE_URL}`,
+    "https://gameview-ue0b.onrender.com",
 ];
 app.use(cors({
     origin: (origin, callback) => {
