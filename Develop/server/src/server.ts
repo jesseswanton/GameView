@@ -11,9 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const forceDatabaseRefresh = false;
 
+
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://gameview-ue0b.onrender.com",
+//  "http://localhost:3000",
+  "https://gameview-qxo7.onrender.com",
+  "*"
 ];
 app.use(
   cors({
@@ -21,6 +23,7 @@ app.use(
       origin: string | undefined,
       callback: (err: Error | null, allow?: boolean) => void
     ) => {
+      console.log("Origin:", origin);
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
