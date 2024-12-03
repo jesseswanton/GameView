@@ -44,6 +44,7 @@
 }
 
 .dropdown-menu li {
+  color: black;
   padding: 8px 20px;
   cursor: pointer;
   transition: background-color 0.3s;
