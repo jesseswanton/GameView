@@ -14,7 +14,7 @@ const forceDatabaseRefresh = false;
 const allowedOrigins = [
   "https://gameview-qxo7.onrender.com/",
   "http://localhost:3000",
-  "*"
+  "*",
 ];
 app.use(
   cors({
