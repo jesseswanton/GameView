@@ -41,37 +41,37 @@ app.use(express.json());
 app.use(routes);
 
 // Function to create the database if it doesn't exist
-const createDatabaseIfNotExist = async () => {
-  try {
-    // Construct the connection URL using .env values
-    const dbUrl = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/postgres`;
+// const createDatabaseIfNotExist = async () => {
+//   try {
+//     // Construct the connection URL using .env values
+//     const dbUrl = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/postgres`;
 
-    // Connect to the default database
-    const defaultSequelize = new sequelize.Sequelize(dbUrl);
+//     // Connect to the default database
+//     const defaultSequelize = new sequelize.Sequelize(dbUrl);
 
-    await defaultSequelize.authenticate();
+//     await defaultSequelize.authenticate();
 
-    // Check if the database exists
-    const result = await defaultSequelize.query(
-      `SELECT 1 FROM pg_database WHERE datname = '${process.env.DB_NAME}';`,
-      { type: QueryTypes.SELECT }
-    );
+//     // Check if the database exists
+//     const result = await defaultSequelize.query(
+//       `SELECT 1 FROM pg_database WHERE datname = '${process.env.DB_NAME}';`,
+//       { type: QueryTypes.SELECT }
+//     );
 
-    // If database doesn't exist, create it
-    if (result.length === 0) {
-      await defaultSequelize.query(`CREATE DATABASE ${process.env.DB_NAME}`);
-      console.log(`Database ${process.env.DB_NAME} created.`);
-    } else {
-      console.log(`Database ${process.env.DB_NAME} already exists.`);
-    }
+//     // If database doesn't exist, create it
+//     if (result.length === 0) {
+//       await defaultSequelize.query(`CREATE DATABASE ${process.env.DB_NAME}`);
+//       console.log(`Database ${process.env.DB_NAME} created.`);
+//     } else {
+//       console.log(`Database ${process.env.DB_NAME} already exists.`);
+//     }
 
-    // Close the connection to the default database
-    await defaultSequelize.close();
-  } catch (error) {
-    console.error("Error while checking or creating the database:", error);
-    process.exit(1);
-  }
-};
+//     // Close the connection to the default database
+//     await defaultSequelize.close();
+//   } catch (error) {
+//     console.error("Error while checking or creating the database:", error);
+//     process.exit(1);
+//   }
+// };
 
 // Create the database if necessary and sync models
   sequelize
