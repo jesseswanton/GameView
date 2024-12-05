@@ -58,7 +58,9 @@ const createDatabaseIfNotExist = async () => {
 };
 // Create the database if necessary and sync models
 createDatabaseIfNotExist().then(() => {
-    sequelize
+    const sequelizeUrl = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/${process.env.DB_NAME}`;
+    const newSequelize = new sequelize.Sequelize(sequelizeUrl);
+    newSequelize
         .sync({ force: forceDatabaseRefresh })
         .then(() => {
         app.listen(PORT, () => {
