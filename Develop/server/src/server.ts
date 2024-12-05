@@ -74,7 +74,6 @@ const createDatabaseIfNotExist = async () => {
 };
 
 // Create the database if necessary and sync models
-createDatabaseIfNotExist().then(() => {
   sequelize
     .sync({ force: forceDatabaseRefresh })
     .then(() => {
@@ -86,4 +85,3 @@ createDatabaseIfNotExist().then(() => {
       console.error("Failed to sync database:", error);
       process.exit(1);
     });
-});
