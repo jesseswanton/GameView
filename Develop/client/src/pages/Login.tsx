@@ -78,7 +78,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
     const data = await login(loginData);
     Auth.login(data.token);
     console.log('Auth token saved:', localStorage.getItem('id_token'));
-    navigate('/');  // Redirect after the token is set
+    navigate('/api/');  // Redirect after the token is set
   } catch (err) {
     setLoginError('Failed to login, check your username and password');
     console.error('Failed to login', err);
@@ -98,7 +98,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
       const data = await register(registerData);
       console.log("Returned Data: ", data);
       Auth.login(data.token);
-      navigate('/'); // Redirect to favorites page on successful registration
+      navigate('/api/'); // Redirect to favorites page on successful registration
     } catch (err) {
       console.log("Error: ", err);
       setRegisterError('Failed to register');
