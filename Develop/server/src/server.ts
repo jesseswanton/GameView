@@ -2,7 +2,7 @@ import express from "express";
 import routes from "./routes/index.js";
 import { sequelize } from "./models/index.js";
 import dotenv from "dotenv";
-import { QueryTypes } from "sequelize";
+// import { QueryTypes } from "sequelize";
 import cors from "cors";
 
 dotenv.config();
