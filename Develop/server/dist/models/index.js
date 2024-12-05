@@ -6,7 +6,7 @@ import { FavoriteFactory } from './favorite.js';
 const sequelize = process.env.DB_URL
     ? new Sequelize(process.env.DB_URL)
     : new Sequelize(process.env.DB_NAME || '', process.env.DB_USER || '', process.env.DB_PASSWORD, {
-        host: 'localhost',
+        host: 'dpg-ct8t7k0gph6c73dhul10-a',
         dialect: 'postgres',
         dialectOptions: {
             decimalNumbers: true,
