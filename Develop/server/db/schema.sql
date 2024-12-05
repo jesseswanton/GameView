@@ -1,8 +1,17 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS gameview_db;
+DROP DATABASE IF EXISTS gameview_db_zrk5;
 
 -- CREATE DATABASE
-CREATE DATABASE gameview_db;
+CREATE DATABASE gameview_db_zrk5;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(30),
+  password VARCHAR(30),
+  email VARCHAR(30),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+);
 
 -- Create favorites table
 CREATE TABLE favorites (

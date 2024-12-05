@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 const forceDatabaseRefresh = false;
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://gameview-qxo7.onrender.com",
+    "https://gameview-ru4h.onrender.com",
     "*"
 ];
 app.use(cors({
@@ -58,9 +58,7 @@ const createDatabaseIfNotExist = async () => {
 };
 // Create the database if necessary and sync models
 createDatabaseIfNotExist().then(() => {
-    const sequelizeUrl = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/${process.env.DB_NAME}`;
-    const newSequelize = new sequelize.Sequelize(sequelizeUrl);
-    newSequelize
+    sequelize
         .sync({ force: forceDatabaseRefresh })
         .then(() => {
         app.listen(PORT, () => {

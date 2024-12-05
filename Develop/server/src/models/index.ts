@@ -13,7 +13,7 @@ const sequelize = process.env.DB_URL
       process.env.DB_USER || '',
       process.env.DB_PASSWORD,
       {
-        host: 'dpg-ct6gk3rv2p9s739buhjg-a',
+        host: 'localhost',
         dialect: 'postgres',
         dialectOptions: {
           decimalNumbers: true,
@@ -24,5 +24,9 @@ const sequelize = process.env.DB_URL
 const User = UserFactory(sequelize);
 
 const Favorite = FavoriteFactory(sequelize);
+
+Favorite.belongsTo(User)
+
+User.hasMany(Favorite)
 
 export { sequelize, User, Favorite };

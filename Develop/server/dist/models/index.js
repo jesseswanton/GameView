@@ -14,4 +14,6 @@ const sequelize = process.env.DB_URL
     });
 const User = UserFactory(sequelize);
 const Favorite = FavoriteFactory(sequelize);
+Favorite.belongsTo(User);
+User.hasMany(Favorite);
 export { sequelize, User, Favorite };
