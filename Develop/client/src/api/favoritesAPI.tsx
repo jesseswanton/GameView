@@ -1,9 +1,9 @@
-const API_URL = 'http://localhost:3001/api/favorites';
+// const API_URL = 'https://gameview-ru4h.onrender.com/api/favorites';
 
 // Function to get all favorite games
 export const getFavorites = async (token: string) => {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch('/api/favorites', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -25,7 +25,7 @@ export const getFavorites = async (token: string) => {
 // Function to add or remove a game from favorites
 export const toggleFavorite = async (gameName: string, isFavorite: boolean, token: string) => {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch('api/favorites', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -48,7 +48,7 @@ export const toggleFavorite = async (gameName: string, isFavorite: boolean, toke
 // Function to remove a game from favorites
 export const removeFavorite = async (gameName: string, token: string) => {
   try {
-    const response = await fetch(`${API_URL}/${gameName}`, {
+    const response = await fetch(`api/favorites/${gameName}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,

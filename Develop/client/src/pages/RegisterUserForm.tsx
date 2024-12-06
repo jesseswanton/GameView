@@ -74,7 +74,7 @@ const RegisterForm = () => {
     try {
       const data = await register(registerData);
       Auth.login(data.token);
-      navigate('/favorites'); // Navigate to the favorites page after successful registration
+      navigate('/api/favorites'); // Navigate to the favorites page after successful registration
     } catch (err) {
       console.log("Error: ", err);
       setRegisterError('Registration failed. Please try again.');

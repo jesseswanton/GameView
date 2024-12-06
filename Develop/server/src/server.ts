@@ -13,8 +13,8 @@ const forceDatabaseRefresh = false;
 
 
 const allowedOrigins = [
-//  "http://localhost:3000",
-  "https://gameview-qxo7.onrender.com",
+ "http://localhost:3000",
+  "https://gameview-ru4h.onrender.com",
   "*"
 ];
 app.use(
