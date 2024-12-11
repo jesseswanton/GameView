@@ -75,8 +75,8 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const handleNavigateToSearch = (event: React.MouseEvent<HTMLElement>) => {
     const gameName = event.currentTarget.querySelector("h3")?.innerText.trim().toLowerCase();
-    console.debug("Extracted gameName:", gameName);
-    console.debug("gameArray:", gameArray);
+    console.log("Extracted gameName:", gameName);
+    console.log("gameArray:", gameArray);
     const currentGame = gameArray.find((game) => game.name?.toLowerCase() === gameName);
     if (currentGame) {
       navigate("/search-video", { state: { game: currentGame } });
