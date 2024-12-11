@@ -9,7 +9,7 @@ import Dropdown from '../components/Dropdown';
 import { GameData } from "../interfaces/Data";
 import { useNavigate } from "react-router-dom";
 import { fetchGames } from "../api/rawgAPI";
-import { HiSearch, HiOutlineStar } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
 
 
 
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
   const getGames = async () => {
     try {
       const games = await fetchGames(query, page);
-      setGameArray(games);
+      setGameArray(games.filter((game: GameData) => game.name));
     } catch (error) {
       console.error("Failed to retrieve games:", error);
       setError(true);
@@ -74,8 +74,10 @@ const Home: React.FC = () => {
 
   const navigate = useNavigate();
   const handleNavigateToSearch = (event: React.MouseEvent<HTMLElement>) => {
-    const gameName = event.currentTarget.querySelector("h3")?.innerText;
-    const currentGame = gameArray.find((game) => game.name === gameName);
+    const gameName = event.currentTarget.querySelector("h3")?.innerText.trim().toLowerCase();
+    console.debug("Extracted gameName:", gameName);
+    console.debug("gameArray:", gameArray);
+    const currentGame = gameArray.find((game) => game.name?.toLowerCase() === gameName);
     if (currentGame) {
       navigate("/search-video", { state: { game: currentGame } });
     }
@@ -166,7 +168,6 @@ const Home: React.FC = () => {
           <div className="game-list">
             {gameArray.map((game, index) => (
               <div onClick={(event) => handleNavigateToSearch(event)} key={index} className="card">
-                <HiOutlineStar className="favorite" size={20} stroke="#fef08a"></HiOutlineStar>
                 <img className="card-img"  src={game.background_image} alt={`${game.name} cover art`} />
                   <h3 className="card-title">{game.name}</h3>
               </div>
