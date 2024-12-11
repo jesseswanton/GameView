@@ -45,6 +45,10 @@ const SearchPage: React.FC = () => {
 
     const getGameDetails = async () => {
       const id = game.id;
+      if (!game.id) {
+        console.log("Game ID is missing. Cannot fetch game details.");
+        return;
+      }
       try {
         const gameDetails = await fetchGameDetails(id);
         if (gameDetails) {
