@@ -42,12 +42,12 @@ const Favorites = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const handleNavigateToSearch = (gameName: string) => {
-    if (gameName) {
-      navigate("/search-video", { state: { searchQuery: "Reviews for " + gameName } });
-    }
-  };
+  // const navigate = useNavigate();
+  // const handleNavigateToSearch = (gameName: string) => {
+  //   if (gameName) {
+  //     navigate("/search-video", { state: { game: gameName } });
+  //   }
+  // };
 
   const handleSelectGame = (game: GameData) => {
     setSelectedGame(game);
@@ -55,6 +55,7 @@ const Favorites = () => {
 
   return (
     <div>
+      <br></br>
       <h2 className="pb-5">
         Hey {auth.getProfile().username}!
       </h2>
@@ -70,7 +71,7 @@ const Favorites = () => {
             <div key={gameName}>
               <GameCard gameName={gameName} onSelectGame={handleSelectGame} />
               <button className='btn' onClick={() => handleRemoveFavorite(gameName)}>Remove from Favorites</button>
-              <button className='btn' onClick={() => handleNavigateToSearch(gameName)}>See Reviews</button>
+              {/* <button className='btn' onClick={() => handleNavigateToSearch(gameName)}>See Reviews</button> */}
             </div>
           ))
         ) : (

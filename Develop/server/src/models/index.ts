@@ -13,8 +13,9 @@ const sequelize = process.env.DB_URL
       process.env.DB_USER || '',
       process.env.DB_PASSWORD,
       {
-        // host: 'dpg-ct6gk3rv2p9s739buhjg-a',
-        host: 'localhost',
+        host: 'dpg-ct6gk3rv2p9s739buhjg-a',
+        //Uncomment the line below and comment out the line above to use the local database instead
+        // host: 'localhost',
         dialect: 'postgres',
         dialectOptions: {
           decimalNumbers: true,
