@@ -22,12 +22,12 @@ const SearchPage: React.FC = () => {
   const navigate = useNavigate();
 
   const game = location.state?.game || "";
-  const [query] = useState(game.name);
+  const [query] = useState("Reviews for " + game.name);
   const [videos, setVideos] = useState<Video[]>([]);
   const [gameDetails, setGameDetails] = useState<gameDetails>();
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null); // New state for success message
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {
     setIsLoggedIn(auth.loggedIn());
@@ -45,6 +45,10 @@ const SearchPage: React.FC = () => {
 
     const getGameDetails = async () => {
       const id = game.id;
+      if (!game.id) {
+        console.log("Game ID is missing. Cannot fetch game details.");
+        return;
+      }
       try {
         const gameDetails = await fetchGameDetails(id);
         if (gameDetails) {
@@ -123,25 +127,36 @@ const SearchPage: React.FC = () => {
       <span className="extra-details">
         <div className="extra-details-released">
           <h3>Released:</h3>
-          <p>{game.released}</p>
+          <p>{game.released || "Unknown Release Date"}</p>
         </div>
         <div className="extra-details-rated">
           <h3>Rating:</h3>
-          <p>{game.esrb_rating.name}</p>
+          <p>{game.esrb_rating?.name || "Not Rated"}</p>
         </div>
         <div className="extra-details-genres">
           <h3>Genres:</h3>
-          <p>{game.genres.map((genre: { name: string }) => genre.name).join(", ")}</p>
+          <p>{game.genres?.map((genre: { name: string }) => genre.name).join(", ") || "Unknown Genres"}</p>
         </div>
         <div className="extra-details-platforms">
           <h3>Platforms:</h3>
-          <p>{game.platforms.map((platform: { platform: { name: string } }) => platform.platform.name).join(", ")}</p>
+          <p>{game.platforms?.map((platform: { platform: { name: string } }) => platform.platform.name).join(", ") || "Platforms Unavailable"}</p>
         </div>
         <div className="reddit">
           <h3>Join the community:</h3>
-          <a href={gameDetails?.reddit_url} target="_blank">{game.name}</a>
+          {gameDetails?.reddit_url ? (
+              <a
+                href={gameDetails.reddit_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {game.name}
+              </a>
+            ) : (
+              <span style={{ color: "white" }}>Subreddit not found</span>
+            )}
         </div>
       </span>
+
       <div className="container">
       <br></br>
       {selectedVideo ? (
