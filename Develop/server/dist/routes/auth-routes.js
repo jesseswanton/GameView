@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+dotenv.config();
 const router = Router();
 // This function is triggered during login or registration
 const generateToken = (username) => {
@@ -58,19 +60,26 @@ const register = async (req, res) => {
 };
 //login user
 export const login = async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({
-        where: { username },
-    });
-    if (!user) {
-        return res.status(401).json({ message: 'Authentication failed' });
+    try {
+        const { username, password } = req.body;
+        const user = await User.findOne({
+            where: { username },
+        });
+        if (!user) {
+            return res.status(401).json({ message: 'Authentication failed user not found' });
+        }
+        const passwordIsValid = await bcrypt.compare(password, user.password);
+        if (!passwordIsValid) {
+            console.log(password, jwt.decode(user.password));
+            return res.status(401).json({ message: 'Authentication failed password invalid' });
+        }
+        const token = generateToken(user.username); // Generate the JWT for the user
+        return res.json({ token }); // Send the token back to the client
     }
-    const passwordIsValid = await bcrypt.compare(password, user.password);
-    if (!passwordIsValid) {
-        return res.status(401).json({ message: 'Authentication failed' });
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "internal service error" });
     }
-    const token = generateToken(user.username); // Generate the JWT for the user
-    return res.json({ token }); // Send the token back to the client
 };
 //reset password
 export const resetPassword = async (req, res) => {

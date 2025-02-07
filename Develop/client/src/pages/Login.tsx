@@ -75,6 +75,7 @@ const handleLoginSubmit = async (e: FormEvent) => {
   e.preventDefault();
   setLoginError(null);
   try {
+    console.log(loginData)
     const data = await login(loginData);
     Auth.login(data.token);
     console.log('Auth token saved:', localStorage.getItem('id_token'));

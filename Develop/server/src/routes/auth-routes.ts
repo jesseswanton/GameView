@@ -2,6 +2,8 @@ import { Router, type Request, type Response } from 'express';
 import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+dotenv.config()
 
 const router = Router();
 
@@ -10,6 +12,7 @@ const generateToken = (username: string) => {
   const secretKey = process.env.JWT_SECRET_KEY || '';  // Get the secret key from .env
   return jwt.sign({ username }, secretKey, { expiresIn: '1h' });  // Create JWT with an expiration time
 };
+
 console.log("secretKey: ", process.env.JWT_SECRET_KEY, jwt.sign);
 // Check if username is available
 router.post('/check-username', async (req: Request, res: Response) => {
@@ -69,22 +72,28 @@ const register = async (req: Request, res: Response) => {
 
 //login user
 export const login = async (req: Request, res: Response) => {
+  try {
   const { username, password } = req.body;
 
   const user = await User.findOne({
     where: { username },
   });
   if (!user) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    return res.status(401).json({ message: 'Authentication failed user not found' });
   }
 
   const passwordIsValid = await bcrypt.compare(password, user.password);
   if (!passwordIsValid) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    console.log(password, jwt.decode(user.password))
+    return res.status(401).json({ message: 'Authentication failed password invalid' });
   }
 
   const token = generateToken(user.username);  // Generate the JWT for the user
   return res.json({ token });  // Send the token back to the client
+} catch (error) {
+  console.error(error);
+  return res.status(500).json({ message: "internal service error"})
+}
 };
 
 //reset password

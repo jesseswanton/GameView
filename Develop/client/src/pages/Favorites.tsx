@@ -4,7 +4,7 @@ import GameCard from '../components/GameCard';
 import auth from '../utils/auth';
 import { Link } from 'react-router-dom';
 import { GameData } from '../interfaces/Data';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState<string[]>([]);  // Store gameNames
