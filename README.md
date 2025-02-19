@@ -15,7 +15,7 @@
 
   ## Description
 
-   A web page for users to look up game titles. They can create an account to  login and and save thier favorites. A user can search on a game, click the card and get information and reviews. They then have the option to save as a favorite. 
+   A web page for users to look up game titles. They can create an account to  login and and save thier favorites. A user can search on a game, click the card and get information and watch video reviews using the Youtube API. They then have the option to save as a favorite. 
 
   ## Design
 
